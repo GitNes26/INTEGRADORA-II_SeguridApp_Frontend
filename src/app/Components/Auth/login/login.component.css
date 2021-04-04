@@ -1,0 +1,12 @@
+.bg {
+    background: url('../../../../resources/fondo_gris.jpg');
+    background-color: rgb(184, 109, 12);
+}
+
+.card-login{
+    background-color: aquamarine;
+}
+
+.card-message {
+    background-color: brown;
+}
