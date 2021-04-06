@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { errorMessage, successDialog, timeMessage } from 'src/app/Functions/Alerts';
-import { User } from 'src/app/Models/user';
-import { AuthService } from '../../../../../../../../Aplicaciones Web para I4.0/PRACTICAS/Angular/practicaCrudAngular/src/app/auth.service';
+import { errorMessage, successDialog, timeMessage } from '../../../Functions/Alerts';
+import { User } from '../../../Models/user';
+import { AuthService } from '../../../Services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -48,8 +48,7 @@ export class RegisterComponent implements OnInit {
     return pass === pass2 ? false : true
   }
 
-  register(event: Event) {
-    event.preventDefault()
+  register() {
     if (this.formG.valid){ // verifica las validaciones de los campos
       // const data = this.formG.value; // console.log(data);
       this.setData()
@@ -69,7 +68,6 @@ export class RegisterComponent implements OnInit {
 
   setData() {
     this.user = {
-      id: 0,
       name: this.formG.get('name').value,
       last_name: this.formG.get('last_name').value,
       age: this.formG.get('age').value,

@@ -1,5 +1,5 @@
-// import Swal from "sweetalert2";
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import Swal from "sweetalert2";
+// import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 export function successDialog(msg: string) {
     return Swal.fire({
@@ -31,7 +31,7 @@ export function deleteMessage(productName: string|any) {
         showConfirmButton: true,
         confirmButtonText: 'Eliminar',
         confirmButtonColor: '#d33',
-        showCancelButton: true
+        showCancelButton: true,
 
     }).then((result) => {
         if (result.isConfirmed) {

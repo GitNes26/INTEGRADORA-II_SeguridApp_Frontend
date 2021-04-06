@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../Models/user';
 import { Observable } from 'rxjs';
 
@@ -10,18 +10,18 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   apiURL = environment.apiURL;
-  header = new Headers({'Type-content': 'aplication/json', 'Authorization': 'Bearer ' + localStorage.getItem('myToken')});
+  header = new HttpHeaders({'Type-content': 'aplication/json', 'Authorization': 'Bearer ' + localStorage.getItem('myToken')});
 
   constructor( private http:HttpClient ) {
     this.header.append('Authorization', 'Bearer ' + localStorage.getItem('myToken'))
   }
 
   register(user:User): Observable<any> {
-    return this.http.post(`${this.apiURL}register`, user)
+    return this.http.post(`${this.apiURL}api/register`, user)
   }
 
   login(user:User): Observable<any> {
-    const token = this.http.post(`${this.apiURL}login`, user)
+    const token = this.http.post(`${this.apiURL}api/login`, user)
     return token
   }
 
@@ -34,6 +34,7 @@ export class AuthService {
   }
 
   show() {
-    return this.http.get(`${this.apiURL}api/user`, {headers: this.header})
+    const user = this.http.get(`${this.apiURL}api/profile`, {headers: this.header})
+    return user
   }
 }

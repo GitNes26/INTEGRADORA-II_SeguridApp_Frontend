@@ -1,42 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-sm-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">MENU</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div *ngIf="sessionInit">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
-            <li class="nav-item">
-              <a class="nav-link" routerLink='/main' routerLinkActive='active'>
-              Main</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink='/products' routerLinkActive='active'>
-              Productos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink='/comments' routerLinkActive='active'>
-              Comentarios</a>
-            </li>
-          </ul>
-        </div>
-        <div class="d-flex ms-auto" *ngIf="sessionInit">
-          <div class="text-light fw-light fst-italic">{{username}}</div>
-          <button class="btn btn-outline-danger" aria-current="page" (click)='logout()'>
-          Logout</button>
-        </div>
-        <div class="d-flex ms-auto" *ngIf="!sessionInit">
-          <button class="btn btn-outline-success" aria-current="page" routerLink='/login' routerLinkActive='active'>
-          Login</button>
-          <button class="btn btn-outline-light mx-1" routerLink='/register' routerLinkActive='active'>
-          Registro</button>
-        </div>
-        
-        <!-- <form class="d-flex">
-          <input class="form-control me-2" type="search" id="ir" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit" routerLink='' routerLinkActive='active'>Search</button>
-        </form> -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-sm-top" *ngIf="navBarActive">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">| <span class="fw-lighter">Segurid</span><span class="fw-bold">App</span> |</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div *ngIf="sessionInit">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/main' routerLinkActive='active'>
+            Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/sensors' routerLinkActive='active'>
+            Sensores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/locations' routerLinkActive='active'>
+            Locaciones</a>
+          </li>
+        </ul>
       </div>
+      <div class="d-flex ms-auto" *ngIf="sessionInit">
+        <!-- <div class="text-light fw-light fst-italic mx-2">{{user.name}}</div> -->
+        <button class="btn btn-outline-danger" aria-current="page" (click)='logout()'>
+        Logout</button>
+      </div>
+      <div class="d-flex ms-auto" *ngIf="!sessionInit">
+        <button class="btn btn-outline-success" aria-current="page" routerLink='/login' routerLinkActive='active'>
+        Login</button>
+        <button class="btn btn-outline-light mx-1" routerLink='/register' routerLinkActive='active'>
+        Registro</button>
+      </div>
+      
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" id="ir" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit" routerLink='' routerLinkActive='active'>Search</button>
+      </form> -->
     </div>
-  </nav>
+  </div>
+</nav>

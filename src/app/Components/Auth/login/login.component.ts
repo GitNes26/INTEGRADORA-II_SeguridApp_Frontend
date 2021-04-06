@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../../../Models/user';
 import { AuthService } from '../../../Services/auth.service';
 import { Router } from '@angular/router';
-import { errorMessage, successDialog, timeMessage } from 'src/app/Functions/Alerts';
+import { errorMessage, successDialog, timeMessage } from '../../../Functions/Alerts';
 
 @Component({
   selector: 'app-login',
@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("email",this.user.email)
             console.log('dentro del metodo login de login', localStorage)
             this.router.navigate(['/main'])
+            // window.location.reload()
           })
         })
       }, error => {
@@ -60,11 +61,6 @@ export class LoginComponent implements OnInit {
 
   setData() {
     this.user = {
-      id: 0,
-      name: '',
-      last_name: '',
-      age: 0,
-      cel: 0,
       email: this.formG.get('email').value,
       password: this.formG.get('pwd').value,
     }
