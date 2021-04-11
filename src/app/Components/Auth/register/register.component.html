@@ -1,116 +1,123 @@
-<div class="row m-5">
-    <!-- <img src="../../../../resources/Logo_sistema_seguridad_negativo.png" alt="logo SeguridApp" height="100px"> -->
-    <h1><span class="fw-lighter fs-1">Segurid</span><span class="fw-bold fs-1">App</span></h1>
-</div>
-<div class="row mt-5 mb-5">
-    <div class="col-2"></div>
-    <div class="card-group col-8">
-        <div class="card bg-dark rounded-start text-light p-5 card-message">
-            <h1 class="display-2 text-center fw-bold">REGISTRATE</h1>
-            <p class="lead text-center fs-1">Y obtén SeguridApp en tu hogar</p>
-            <a class='btn btn-light form-control btn-lg mt-3 fw-bold' [routerLink]="['/login']" routerLinkActive="active">Ya tengo cuenta</a>
-        </div>
-        <div class="card bg-ligth rounded-end text-dark p-5">
-            <h1 class="display-1 text-center">REGISTRATE</h1>
-            <form class="" [formGroup]="formG" (ngSubmit)="register()" novalidate>
-                <div class="row g-2">
-                    <div class="col-md">
-                        <div class="form-floating mb-3"> <!-- NOMBRE -->
-                            <input class='form-control mt-3' type="text" formControlName="name" id="floatingName" placeholder="Nombre"
-                            [class.is-invalid]="validateTextField('name')">
-                            <label for="floatingName">Nombre</label>
-                            <div *ngIf="validateErrorTextField('name')">
-                                <small class="badge alert-danger" *ngIf="formG.get('name').hasError('required')">
-                                    Este es un campo requerido.
-                                </small>
+<div class="container-fluid">
+    <div class="row m-5">
+        <!-- <img src="../../../../resources/Logo_sistema_seguridad_negativo.png" alt="logo SeguridApp" height="100px"> -->
+        <h1 class=""><span class="fw-lighter fs-1">Segurid</span><span class="fw-bold fs-1">App</span></h1>
+    </div>
+    <div class="row mt-5">
+        <div class="col-2"></div>
+        <div class="card-group col-8">
+            <div class="row align-items-center card bg-dark rounded-start text-light p-5 card-message">
+                <h1 class="col display-2 text-center fw-bold">REGISTRATE</h1>
+                <p class="col lead text-center fs-1">Y obtén SeguridApp en tu hogar</p>
+                <a class='btn btn-light form-control btn-lg mt-3 fw-bold' [routerLink]="['/login']" routerLinkActive="active">Ya tengo cuenta</a>
+            </div>  
+            <div class="card bg-ligth rounded-end text-dark p-5">
+                <h1 class="display-1 text-center">REGISTRATE</h1>
+                <form class="" [formGroup]="formG" (ngSubmit)="register()" novalidate>
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating mb-3"> <!-- NOMBRE -->
+                                <input class='form-control mt-3' type="text" formControlName="name" id="floatingName" placeholder="Nombre"
+                                [class.is-invalid]="validateTextField('name')">
+                                <label for="floatingName">Nombre</label>
+                                <div *ngIf="validateErrorTextField('name')">
+                                    <small class="badge alert-danger" *ngIf="formG.get('name').hasError('required')">
+                                        Este es un campo requerido.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating mb-3"> <!-- APELLIDO -->
+                                <input class='form-control mt-3' type="text" formControlName="last_name" id="floatingLastName" placeholder="Apellido"
+                                [class.is-invalid]="validateTextField('last_name')">
+                                <label for="floatinLastNamel">Apellido</label>
+                                <div *ngIf="validateErrorTextField('last_name')">
+                                    <small class="badge alert-danger" *ngIf="formG.get('last_name').hasError('required')">
+                                        Este es un campo requerido.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md">
-                        <div class="form-floating mb-3"> <!-- APELLIDO -->
-                            <input class='form-control mt-3' type="text" formControlName="last_name" id="floatingLastName" placeholder="Apellido"
-                            [class.is-invalid]="validateTextField('last_name')">
-                            <label for="floatinLastNamel">Apellido</label>
-                            <div *ngIf="validateErrorTextField('last_name')">
-                                <small class="badge alert-danger" *ngIf="formG.get('last_name').hasError('required')">
-                                    Este es un campo requerido.
-                                </small>
+                    <div class="row g-2">
+                        <div class="col-3">
+                            <div class="form-floating mb-3"> <!-- EDAD -->
+                                <input class='form-control mt-3' type="number" formControlName="age" id="floatingAge" placeholder="Edad"
+                                [class.is-invalid]="validateTextField('age')">
+                                <label for="floatingAge">Edad</label>
+                                <div *ngIf="validateErrorTextField('age')">
+                                    <small class="badge alert-danger" *ngIf="formG.get('age').hasError('required')">
+                                        Este es un campo requerido.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating mb-3"> <!-- No. CELULAR -->
+                                <input class='form-control mt-3' type="text" formControlName="cel" id="floatinCel" placeholder="Numero celular"
+                                [class.is-invalid]="validateTextField('cel')">
+                                <label for="floatinCel">Numero celular</label>
+                                <div *ngIf="validateErrorTextField('cel')">
+                                    <small class="badge alert-danger" *ngIf="formG.get('cel').hasError('required')">
+                                        Este es un campo requerido.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row g-2">
-                    <div class="col-3">
-                        <div class="form-floating mb-3"> <!-- EDAD -->
-                            <input class='form-control mt-3' type="number" formControlName="age" id="floatingAge" placeholder="Edad"
-                            [class.is-invalid]="validateTextField('age')">
-                            <label for="floatingAge">Edad</label>
-                            <div *ngIf="validateErrorTextField('age')">
-                                <small class="badge alert-danger" *ngIf="formG.get('age').hasError('required')">
-                                    Este es un campo requerido.
-                                </small>
+                    <hr>
+                    <div class="form-floating mb-3"> <!-- EMAIL -->
+                        <input class='form-control mt-3' type="text" formControlName="email" id="floatingEmail" placeholder="Correo"
+                        [class.is-invalid]="validateTextField('email')">
+                        <label for="floatingEmail">Correo</label>
+                        <div *ngIf="validateErrorTextField('email')">
+                            <small class="badge alert-danger" *ngIf="formG.get('email').hasError('required')">
+                                Este es un campo requerido.
+                            </small>
+                            <small class="badge alert-danger" *ngIf="formG.get('email').hasError('email')">
+                                Asegurate de escribir una direccion de correo valida.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating mb-3"> <!-- CONTRASEÑA -->
+                                <input class='form-control mt-3 lead' type="password" formControlName="pwd" id="floatingPwd" placeholder="Contraseña"
+                                [class.is-invalid]="validateTextField('pwd')">
+                                <label for="floatingPwd">Contraseña</label>
+                                <div *ngIf="validateErrorTextField('pwd')">
+                                    <small class="badge alert-danger" *ngIf="formG.get('pwd').hasError('required')">
+                                        Este es un campo requerido.
+                                    </small>
+                                    <small class="badge alert-danger" *ngIf="formG.get('pwd').hasError('minlength')">
+                                        Asegurate de tener minimo 3 caracteres.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating mb-3"> <!-- CONFIRMAR CONTRASEÑA -->
+                                <input class='form-control mt-3' type="password" formControlName="pwd2" id="floatingPwd2" placeholder="Confirmar Contraseña"
+                                [class.is-invalid]="password2Validate">
+                                <label for="floatingPwd2">Confirmar Contraseña</label>
+                                <div *ngIf="validateErrorTextField('pwd2')">
+                                    <small class="badge alert-danger" *ngIf="formG.get('pwd2').hasError('required')">
+                                        Este es un campo requerido.
+                                    </small>
+                                    <small class="badge alert-danger" *ngIf="password2Validate">
+                                        Las contraseñas no coinciden.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md">
-                        <div class="form-floating mb-3"> <!-- No. CELULAR -->
-                            <input class='form-control mt-3' type="text" formControlName="cel" id="floatinCel" placeholder="Numero celular"
-                            [class.is-invalid]="validateTextField('cel')">
-                            <label for="floatinCel">Numero celular</label>
-                            <div *ngIf="validateErrorTextField('cel')">
-                                <small class="badge alert-danger" *ngIf="formG.get('cel').hasError('required')">
-                                    Este es un campo requerido.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-floating mb-3"> <!-- EMAIL -->
-                    <input class='form-control mt-3' type="text" formControlName="email" id="floatingEmail" placeholder="Correo"
-                    [class.is-invalid]="validateTextField('email')">
-                    <label for="floatingEmail">Correo</label>
-                    <div *ngIf="validateErrorTextField('email')">
-                        <small class="badge alert-danger" *ngIf="formG.get('email').hasError('required')">
-                            Este es un campo requerido.
-                        </small>
-                        <small class="badge alert-danger" *ngIf="formG.get('email').hasError('email')">
-                            Asegurate de escribir una direccion de correo valida.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-floating mb-3"> <!-- CONTRASEÑA -->
-                    <input class='form-control mt-3 lead' type="password" formControlName="pwd" id="floatingPwd" placeholder="Contraseña"
-                    [class.is-invalid]="validateTextField('pwd')">
-                    <label for="floatingPwd">Contraseña</label>
-                    <div *ngIf="validateErrorTextField('pwd')">
-                        <small class="badge alert-danger" *ngIf="formG.get('pwd').hasError('required')">
-                            Este es un campo requerido.
-                        </small>
-                        <small class="badge alert-danger" *ngIf="formG.get('pwd').hasError('minlength')">
-                            Asegurate de tener minimo 3 caracteres.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-floating mb-3"> <!-- CONFIRMAR CONTRASEÑA -->
-                    <input class='form-control mt-3' type="password" formControlName="pwd2" id="floatingPwd2" placeholder="Confirmar Contraseña"
-                    [class.is-invalid]="password2Validate">
-                    <label for="floatingPwd2">Confirmar Contraseña</label>
-                    <div *ngIf="validateErrorTextField('pwd2')">
-                        <small class="badge alert-danger" *ngIf="formG.get('pwd2').hasError('required')">
-                            Este es un campo requerido.
-                        </small>
-                        <small class="badge alert-danger" *ngIf="password2Validate">
-                            Las contraseñas no coinciden.
-                        </small>
-                    </div>
-                </div>
-                <button class='btn btn-outline-dark form-control btn-lg mt-3' type="submit"
-                [disabled]="password2Validate">
-                    Registrarme
-                </button>
-            </form>
+                    <button class='btn btn-outline-dark form-control btn-lg mt-3' type="submit"
+                    [disabled]="password2Validate">
+                        Registrarme
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="col-2"></div>
 </div>

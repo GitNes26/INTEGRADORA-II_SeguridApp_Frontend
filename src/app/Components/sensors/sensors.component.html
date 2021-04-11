@@ -1,1 +1,183 @@
-<p>sensors works!</p>
+<app-menu></app-menu>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 m-3 mt-5"> <!-- FORMULARIO DE SENSOR -->
+            <div class="card rounded-3">
+                <h3 class="display-6 fw-bold text-center mt-4">SENSOR</h3>
+                <form class="card-body" [formGroup]="formG" (ngSubmit)="create()" novalidate>
+                    <div *ngIf="!updateDisabled"> <!-- FORMULARIO PARA ACTUALIZAR-->
+                        <div class="row g-2">
+                            <div class="col-md">
+                                <!-- <div class="form-floating">
+                                    <select class="form-select" formControlName="pin" id="floatingPin" aria-label="Floating label select example">
+                                    <option value="1" [(ngModel)]="selected.pin">{{selected.pin}}</option>
+                                    </select> 
+                                    <label for="floatingPin">Works with selects</label>
+                                </div> -->
+                                <div class="form-floating mb-3"> <!-- ID -->
+                                    <input class='form-control mt-3' type="text" formControlName="id" [(ngModel)]="selected.id" id="floatingId" placeholder="ID"
+                                    [class.is-invalid]="validateTextField('id')"
+                                    aria-disabled="true" disabled>
+                                    <label for="floatingId">ID</label>
+                                    <div *ngIf="validateErrorTextField('id')">
+                                        <small class="badge alert-danger" *ngIf="formG.get('id').hasError('required')">
+                                            Este es un campo requerido.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-floating mb-3"> <!-- PIN //Posible cambio a un Select-->
+                                    <input class='form-control mt-3' type="number" formControlName="pin" [(ngModel)]="selected.pin" id="floatingPin" placeholder="PIN"
+                                    [class.is-invalid]="validateTextField('pin')"
+                                    aria-disabled="true" disabled>
+                                    <label for="floatinLPin">PIN</label>
+                                    <div *ngIf="validateErrorTextField('pin')">
+                                        <small class="badge alert-danger" *ngIf="formG.get('pin').hasError('required')">
+                                            Este es un campo requerido.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3"> <!-- NOMBRE -->
+                            <input class="form-control mt-3" type="text" formControlName="name" [(ngModel)]="selected.name" id="floatingName" placeholder="Nombre"
+                            [class.is-invalid]="validateTextField('name')"
+                            aria-disabled="true" disabled>
+                            <label for="floatingName">Nombre</label>
+                            <div *ngIf="validateErrorTextField('name')">
+                                <small class="badge alert-danger" *ngIf="formG.get('name').hasError('required')">
+                                    Este es un campo requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="updateDisabled"> <!-- FORMULARIO PARA AGREGAR-->
+                        <div class="row g-2">
+                            <div class="col-md">
+                                <!-- <div class="form-floating">
+                                    <select class="form-select" formControlName="pin" id="floatingPin" aria-label="Floating label select example">
+                                    <option value="1" [(ngModel)]="selected.pin">{{selected.pin}}</option>
+                                    </select> 
+                                    <label for="floatingPin">Works with selects</label>
+                                </div> -->
+                                <div class="form-floating mb-3"> <!-- ID -->
+                                    <input class='form-control mt-3' type="text" formControlName="id" [(ngModel)]="selected.id" id="floatingId" placeholder="ID"
+                                    [class.is-invalid]="validateTextField('id')"
+                                    aria-disabled="true">
+                                    <label for="floatingId">ID</label>
+                                    <div *ngIf="validateErrorTextField('id')">
+                                        <small class="badge alert-danger" *ngIf="formG.get('id').hasError('required')">
+                                            Este es un campo requerido.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-floating mb-3"> <!-- PIN //Posible cambio a un Select-->
+                                    <input class='form-control mt-3' type="number" formControlName="pin" [(ngModel)]="selected.pin" id="floatingPin" placeholder="PIN"
+                                    [class.is-invalid]="validateTextField('pin')">
+                                    <label for="floatinLPin">PIN</label>
+                                    <div *ngIf="validateErrorTextField('pin')">
+                                        <small class="badge alert-danger" *ngIf="formG.get('pin').hasError('required')">
+                                            Este es un campo requerido.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3"> <!-- NOMBRE -->
+                            <input class="form-control mt-3" type="text" formControlName="name" [(ngModel)]="selected.name" id="floatingName" placeholder="Nombre"
+                            [class.is-invalid]="validateTextField('name')">
+                            <label for="floatingName">Nombre</label>
+                            <div *ngIf="validateErrorTextField('name')">
+                                <small class="badge alert-danger" *ngIf="formG.get('name').hasError('required')">
+                                    Este es un campo requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating"> <!-- LOCACION Select -->
+                        <select class="form-select mb-3" formControlName="location" [(ngModel)]="selected.location" id="floatingSelect" aria-label="Floating label select example"
+                        [class.is-invalid]="validateTextField('location')">
+                            <option selected *ngIf="updateDisabled">Locaciones disponibles...</option>
+                            <option selected value="{{selected.location}}" *ngIf="!updateDisabled">{{selected.location}}</option>
+                            <option *ngFor="let location of locationArray" value={{location.name}}>{{location.name}}</option>
+                        </select>
+                        <label for="floatingSelect">Locación</label>
+                        <div *ngIf="validateErrorTextField('location')">
+                            <small class="badge alert-danger" *ngIf="formG.get('location').hasError('required')">
+                                Este es un campo requerido.
+                            </small>
+                        </div>
+                    </div>
+                    <!-- <div class="form-floating mb-3"> <!- LOCACION TextField->
+                        <input class="form-control mt-3" type="text" formControlName="location" id="floatingLocation" placeholder="Locación"
+                        [class.is-invalid]="validateTextField('location')">
+                        <label for="floatingLocation">Locación</label>
+                        <div *ngIf="validateErrorTextField('location')">
+                            <small class="badge alert-danger" *ngIf="formG.get('location').hasError('required')">
+                                Este es un campo requerido.
+                            </small>
+                        </div>
+                    </div> -->
+                    <div class="form-floating"> <!-- DESCRIPCION -->
+                        <textarea class="form-control" formControlName="description" [(ngModel)]="selected.description" 
+                        placeholder="Leave a comment here" id="floatingDescription" style="height: 100px;"
+                        [class.is-invalid]="validateTextField('id')"></textarea>
+                        <label for="floatingDescription">Descripción</label>
+                        <div *ngIf="validateErrorTextField('description')">
+                            <small class="badge alert-danger" *ngIf="formG.get('description').hasError('required')">
+                                Este es un campo requerido.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <div *ngIf="updateDisabled">
+                            <button class="btn btn-lg btn-outline-dark mt-3 fw-bold">
+                                <i class="fas fa-plus-circle"></i> Agregar
+                            </button>
+                        </div>
+                        <div *ngIf="!updateDisabled">
+                            <a class="btn btn-lg btn-outline-dark mt-3 fw-bold" (click)="update()">
+                                Actualizar <i class="fas fa-pen fa-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col"> <!-- TABLA DE SENSORES -->
+            <h1 class="display-1 text-center fw-bold">MIS SENSORES</h1>
+            <div class="table-responsive rounded-3">
+                <table class="table table-light table-hover">
+                    <thead class="table-dark">
+                        <tr class="">
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">PIN</th>
+                            <th scope="col">Locación</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col" colspan="2" class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sensor of sensorArray"
+                        class="list-group-item-action"
+                        [class.bg-secondary]="sensor == selected"
+                        [class.text.light]="sensor == selected">
+                            <th scope="row">{{sensor.id}}</th>
+                            <td>{{sensor.name}}</td>
+                            <td>{{sensor.pin}}</td>
+                            <td>{{sensor.location}}</td>
+                            <td>{{sensor.description}}</td>
+                            <td><button (click)="showUpdate(sensor)" class="btn btn-primary">Editar <i class="fas fa-pen fa-sm"></i></button></td>
+                            <td><button (click)="delete(sensor)" class="btn btn-danger">Eliminar <i class="fa fa-trash fa-sm"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

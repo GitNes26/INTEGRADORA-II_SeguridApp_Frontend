@@ -1,0 +1,28 @@
+.cam-area {
+    height: 67vh;
+    background: #20202050;
+}
+
+.sensors_area {
+    background: #20202050;
+}
+
+.locations {
+    height: 87vh;
+}
+
+.locations::-webkit-scrollbar{ 
+    width: 2px;
+}
+.locations::-webkit-scrollbar-thumb {
+    background-color: #202020;
+    border-radius: 20px;
+}
+.locations::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.image {
+    --s : 50px;
+    height: var(--s);
+}

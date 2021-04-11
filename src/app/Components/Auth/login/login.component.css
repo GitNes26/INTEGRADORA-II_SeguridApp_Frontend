@@ -1,6 +1,8 @@
-.bg {
-    background: url("/src/assets/images/fondo_gris.jpg");
-    background-color: rgb(184, 109, 12);
+.b {
+    width: 100vw;
+    height: 100vh;
+    /* background: url("\src\assets\images\fondo_gris.jpg"); */
+    background-color: rgb(126, 126, 126);
 }
 
 .card-login{

@@ -7,8 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  i = 1;
 
-  constructor( private router:Router) { }
+  constructor( private router:Router) {}
 
   ngOnInit(): void {
   }
