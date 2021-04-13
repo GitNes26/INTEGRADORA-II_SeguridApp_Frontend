@@ -17,14 +17,16 @@ export class MenuComponent implements OnInit {
   sessionInit = false
   navBarActive = false
   user:User
+  username:string
   locationPath:LocationModel
   locationArray:LocationModel[] = []
   rute:String
 
-  constructor( private authService:AuthService, private router:Router, private activatedRoute:ActivatedRoute, private service:LocationService /*private path:Location*/ ) {
+  constructor( private authService:AuthService, private router:Router, private activatedRoute:ActivatedRoute, private serviceLocation:LocationService /*private path:Location*/ ) {
     if (localStorage.getItem('myToken') != null) {
       this.authService.show().subscribe((o:any) => {
         this.user = o
+        this.username = String(localStorage.setItem('user',this.user.name))
       })
       this.sessionInit = true
       // this.rute = path.path()
@@ -38,13 +40,14 @@ export class MenuComponent implements OnInit {
     // console.log('rute:',this.rute, 'navBar: ',this.navBarActive)
     // console.log('nombre de locacion', this.locationName())
     this.locationName()
+    this.FirstLocation()
   }
 
   ngOnInit(): void {
   }
 
   logout() {
-    timeMessage('Cerrando Sessión...', 1500).then(() => {
+    timeMessage('Cerrando Sesión...', 1500).then(() => {
       localStorage.clear()
       this.sessionInit = false
       this.navBarActive = false
@@ -53,11 +56,18 @@ export class MenuComponent implements OnInit {
   }
 
   locationName() {
-    this.service.showMyLocations().subscribe((o:any) => {
+    this.serviceLocation.showMyLocations().subscribe((o:any) => {
       this.locationArray = o
       this.locationPath = this.locationArray[0]
-      console.log('locationName()',this.locationPath)
+      // console.log('locationName()',this.locationPath)
       return this.locationPath.name
+    })
+  }
+
+  FirstLocation() {
+    this.serviceLocation.showMyLocations().subscribe((o:any) => {
+      this.locationArray = o
+      this.locationPath = this.locationArray[0]
     })
   }
 

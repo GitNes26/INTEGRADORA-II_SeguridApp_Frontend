@@ -81,7 +81,7 @@ export class LocationsComponent implements OnInit {
 
   delete(location:LocationModel) {
     successDialog('La Locación "'+location.name+'" ha sido eliminada.').then (() => {
-      this.service.delete(location.name).subscribe(() => {
+      this.service.delete(location._id).subscribe(() => {
         this.show()
       })
     })

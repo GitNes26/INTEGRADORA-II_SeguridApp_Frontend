@@ -26,8 +26,8 @@ export class LocationService {
     return this.http.put(`${this.apiURL}api/location/`+location._id, location, {headers:this.header})
   }
 
-  delete(name:string): Observable<any> {
-    return this.http.delete(`${this.apiURL}api/location/`+name, {headers:this.header})
+  delete(_id:string): Observable<any> {
+    return this.http.delete(`${this.apiURL}api/location/`+_id, {headers:this.header})
   }
 
   showMyLocations() {

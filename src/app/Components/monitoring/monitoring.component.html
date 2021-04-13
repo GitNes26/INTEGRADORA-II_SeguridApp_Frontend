@@ -3,41 +3,14 @@
 <div class="container-fluid">
     <div class="row my-4">
         <div class="overflow-auto locations col-2 border-end border-dark p-3">
-            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                <div class="card-header fw-bold h4">Cochera</div>
+            <div *ngFor="let location of locationArray" class="card text-white bg-dark mb-3 cursor" style="max-width: 18rem;"
+            [routerLink]="['/monitoring',location.name]" routerLinkActive='active'>
+                <div class="card-header fw-bold h4">{{location.name}}</div>
                 <div class="card-body">
-                    <img src="assets\images\Backgrounds\fondo_cochera_web.jpg" class="card-img-top" alt="Locacion">
+                    <!-- <img src="assets\images\Backgrounds\fondo_cochera_web.jpg" class="card-img-top" alt="Locacion"> -->
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Actualizado hace 3 min</small>
-                </div>
-            </div>
-
-            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-                <div class="card-header fw-bold h4">Sala</div>
-                <div class="card-body">
-                    <img src="assets\images\Backgrounds\fondo_sala_web.jpg" class="card-img-top" alt="Locacion">
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Actualizado hace 5 min</small>
-                </div>
-            </div>
-            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-                <div class="card-header fw-bold h4">Sala</div>
-                <div class="card-body">
-                    <img src="assets\images\Backgrounds\fondo_sala_web.jpg" class="card-img-top" alt="Locacion">
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Actualizado hace 5 min</small>
-                </div>
-            </div>
-            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-                <div class="card-header fw-bold h4">Sala</div>
-                <div class="card-body">
-                    <img src="assets\images\Backgrounds\fondo_sala_web.jpg" class="card-img-top" alt="Locacion">
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Actualizado hace 5 min</small>
+                    <small class="text-muted">Actualizado el {{location.updatedAt}}</small>
                 </div>
             </div>
         </div>

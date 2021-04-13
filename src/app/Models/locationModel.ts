@@ -3,4 +3,5 @@ export class LocationModel {
     reg?: number
     name?: string
     user_id?: number
+    updatedAt?: string
 }

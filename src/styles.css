@@ -5,3 +5,13 @@ body {
     background-position: center;
     background-size: cover;
 }
+
+.cursor { 
+    cursor: pointer;
+    filter: saturate(0);
+}
+.cursor:hover{
+    filter: saturate(1);
+    filter: brightness(1.05);
+ }
+/* .cursor:hover{ filter: sepia(.2)} */

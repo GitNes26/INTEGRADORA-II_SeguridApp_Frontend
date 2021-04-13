@@ -82,6 +82,7 @@ export class SensorsComponent implements OnInit {
       successDialog('Datos Actualizados')
       this.show()
     }, error => {
+      console.log(error);
       errorMessage('El sesnor ya esta registrado.')
     })
     this.updateDisabled = true

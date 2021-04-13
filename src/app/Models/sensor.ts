@@ -1,4 +1,5 @@
 export class Sensor {
+    _id?: string
     reg?: number
     id?: string
     name?: string

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocationService } from '../../Services/location.service';
+import { LocationModel } from '../../Models/locationModel';
 
 @Component({
   selector: 'app-main',
@@ -7,15 +9,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  i = 1;
 
-  constructor( private router:Router) {}
+  locationArray:LocationModel[] = []
+  location:LocationModel
+
+  constructor( private serviceLocation:LocationService, private router:Router) {
+    this.FirstLocation()
+  }
 
   ngOnInit(): void {
   }
 
   goTo(page:string) {
-    this.router.navigate([page])
+    if (page == 'monitoring/') {
+      this.router.navigate([page+this.location.name])
+    } else { this.router.navigate([page]) }
+  }
+
+  FirstLocation() {
+    this.serviceLocation.showMyLocations().subscribe((o:any) => {
+      this.locationArray = o
+      this.location = this.locationArray[0]
+    })
   }
 
 }

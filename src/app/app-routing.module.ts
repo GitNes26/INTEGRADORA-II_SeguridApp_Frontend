@@ -9,17 +9,20 @@ import { MonitoringComponent } from './Components/monitoring/monitoring.componen
 import { SettingsComponent } from './Components/settings/settings.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { MainComponent } from './Components/main/main.component';
+import { CheckLoginGuard } from './Guards/check-login.guard';
+import { NotLoggedInGuard } from './Guards/not-logged-in.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'menu', component: MenuComponent},
-  { path: 'main', component: MainComponent},
-  { path: 'sensors', component: SensorsComponent},
-  { path: 'locations', component: LocationsComponent},
-  { path: 'monitoring/:location', component: MonitoringComponent},
-  { path: 'settings', component: SettingsComponent},
+  { path: 'login', component: LoginComponent, canActivate:[NotLoggedInGuard]},
+  { path: 'register', component: RegisterComponent, canActivate:[NotLoggedInGuard]},
+  { path: 'menu', component: MenuComponent, canActivate:[CheckLoginGuard]},
+  { path: 'main', component: MainComponent, canActivate:[CheckLoginGuard]},
+  { path: 'sensors', component: SensorsComponent, canActivate:[CheckLoginGuard]},
+  { path: 'locations', component: LocationsComponent, canActivate:[CheckLoginGuard]},
+  { path: 'monitoring/:location', component: MonitoringComponent, canActivate:[CheckLoginGuard]},
+  { path: 'settings', component: SettingsComponent, canActivate:[CheckLoginGuard]},
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireccion por default a INDEX
+  // { path: '', redirectTo: 'main', pathMatch: 'full', canActivate:[CheckLoginGuard] }, // redireccion por default a INDEX
   { path: '**', component: NotFoundComponent}
 
 

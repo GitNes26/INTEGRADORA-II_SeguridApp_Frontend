@@ -12,7 +12,7 @@
             Menu</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink='/monitoring/l' routerLinkActive='active'>
+            <a class="nav-link" routerLink='/monitoring/{{locationPath.name}}' routerLinkActive='active'>
               <!-- <a class="nav-link" routerLink='/monitoring/{{location.name}}' routerLinkActive='active'> -->
             Monitoreo</a>
           </li>
@@ -28,6 +28,7 @@
       </div>
       <div class="d-flex ms-auto" *ngIf="sessionInit">
         <div class="text-light fw-light fst-italic mx-2">{{user.name}}</div>
+        <!-- <div class="text-light fw-light fst-italic mx-2">{{username}}</div> -->
         <button class="btn btn-outline-danger" aria-current="page" (click)='logout()'>
         Logout</button>
       </div>

@@ -1,5 +1,8 @@
 import { Location, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { LocationModel } from '../../Models/locationModel';
+import { LocationService } from '../../Services/location.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-monitoring',
@@ -9,8 +12,10 @@ import { Component, OnInit } from '@angular/core';
 export class MonitoringComponent implements OnInit {
 
   rute:String
+  locationArray:LocationModel[] = []
 
-  constructor( private location:Location) {
+  constructor( private serviceLocation:LocationService, private location:Location, private router:Router, private activatedRoute:ActivatedRoute) {
+    this.showLocations()
     this.rute = location.path()
     console.log(this.rute)
   }
@@ -18,19 +23,16 @@ export class MonitoringComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  locationSelected(rute:String) {
-    switch (rute) {
-      case "/monitoring/cochera":
-        return NgClass['cl']
-        break;
-      case "/monitoring/sala":
-        break;
-      case "/monitoring/patio":
-        break;
+  showLocations() {
+    this.serviceLocation.showMyLocations().subscribe((o:any) => {
+      this.locationArray = o
+    })
+  }
+
+  locationSelected(location:String) {
+    console.log('locationSelected():',location);
+    // this.router.navigate([location])
     
-      default:
-        break;
-    }
   }
 
 }
