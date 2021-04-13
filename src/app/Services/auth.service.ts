@@ -12,7 +12,7 @@ export class AuthService {
   apiURL = environment.apiURL;
   header = new HttpHeaders({'Type-content': 'aplication/json', 'Authorization': 'Bearer ' + localStorage.getItem('myToken')});
   
-  private logged = new BehaviorSubject<boolean>(false)
+  // private logged = new BehaviorSubject<boolean>(false)
 
   constructor( private http:HttpClient ) {
     this.header.append('Authorization', 'Bearer ' + localStorage.getItem('myToken'))
@@ -20,9 +20,9 @@ export class AuthService {
     
   }
 
-  get isLogged(): Observable<boolean> {
-    return this.logged.asObservable()
-  }
+  // get isLogged(): Observable<boolean> {
+  //   return this.logged.asObservable()
+  // }
 
   register(user:User): Observable<any> {
     return this.http.post(`${this.apiURL}api/register`, user)
@@ -30,18 +30,18 @@ export class AuthService {
 
   login(user:User): Observable<any> {
     const token = this.http.post(`${this.apiURL}api/login`, user)
-    if (token) {
-      this.logged.next(true)
-    }
+    // if (token) {
+    //   this.logged.next(true)
+    // }
     return token
   }
 
   update(user:User): Observable<any> {
-    return this.http.put(`${this.apiURL}api/user/`+user.id, user.email, {headers: this.header})
+    return this.http.put(`${this.apiURL}api/user`, user.email, {headers: this.header})
   }
 
-  delete(id:number|string): Observable<any> {
-    return this.http.delete(`${this.apiURL}api/user/`+id, {headers: this.header})
+  delete(): Observable<any> {
+    return this.http.delete(`${this.apiURL}api/user`, {headers: this.header})
   }
 
   show() {

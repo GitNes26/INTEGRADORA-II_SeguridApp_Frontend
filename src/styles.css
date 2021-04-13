@@ -14,4 +14,8 @@ body {
     filter: saturate(1);
     filter: brightness(1.05);
  }
+
+ .image {
+     background-position: center;
+ }
 /* .cursor:hover{ filter: sepia(.2)} */

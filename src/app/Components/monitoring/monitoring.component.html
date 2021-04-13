@@ -1,25 +1,13 @@
 <app-menu></app-menu>
 
 <div class="container-fluid">
-    <div class="row my-4">
-        <div class="overflow-auto locations col-2 border-end border-dark p-3">
-            <div *ngFor="let location of locationArray" class="card text-white bg-dark mb-3 cursor" style="max-width: 18rem;"
-            [routerLink]="['/monitoring',location.name]" routerLinkActive='active'>
-                <div class="card-header fw-bold h4">{{location.name}}</div>
-                <div class="card-body">
-                    <!-- <img src="assets\images\Backgrounds\fondo_cochera_web.jpg" class="card-img-top" alt="Locacion"> -->
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Actualizado el {{location.updatedAt}}</small>
-                </div>
-            </div>
-        </div>
+    <div class="row my-4" *ngIf="sensorsInit">
         <div class="col">
             <div class="cam-area text-light text-center">
-                AREA CAMARA
+                <img src="assets\images\Backgrounds\fondo_cochera_web.jpg" class="card-img-top" alt="Locacion" style="width: 50%;">
             </div>
             <div class="sensors_area row justify-content-evenly text-center bg m-1 p-2">
-                <div class="col border-end border-light">
+                <div class="col border-start border-end border-light">
                     <img src="assets\SVG\temperatura.svg" alt="termo" class="image">  
                     <span class="ml-4 fs-1 fw-bold text-light">23</span>
                     <br>
@@ -34,10 +22,12 @@
                     <img src="assets\SVG\sensor_proximidad_cinta_metrica.svg" alt="movimiento" class="image"> <br>
                     <span class="ml-4 fs-1 fw-bold text-light">5.00 mts</span>
                 </div>
-                <div class="col">
-                    | botones |
-                </div>
             </div>
         </div>
+    </div>
+    <div center *ngIf="!sensorsInit">
+        <button class="btn btn-dark btn-lg fw-bold">
+            INICIAR SENSORES
+        </button>
     </div>
 </div>

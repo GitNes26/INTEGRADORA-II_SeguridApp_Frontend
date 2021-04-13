@@ -1,8 +1,8 @@
 import { Location, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { LocationModel } from '../../Models/locationModel';
-import { LocationService } from '../../Services/location.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SensorService } from '../../Services/sensor.service';
+import { Sensor } from '../../Models/sensor';
 
 @Component({
   selector: 'app-monitoring',
@@ -12,10 +12,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MonitoringComponent implements OnInit {
 
   rute:String
-  locationArray:LocationModel[] = []
+  sensorArray:Sensor[] = []
+  sensorsInit = false
 
-  constructor( private serviceLocation:LocationService, private location:Location, private router:Router, private activatedRoute:ActivatedRoute) {
-    this.showLocations()
+  constructor( private serviceSensor:SensorService, private location:Location, private router:Router, private activatedRoute:ActivatedRoute) {
+    this.showSensors()
     this.rute = location.path()
     console.log(this.rute)
   }
@@ -23,11 +24,20 @@ export class MonitoringComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showLocations() {
-    this.serviceLocation.showMyLocations().subscribe((o:any) => {
-      this.locationArray = o
+  showSensors() {
+    this.serviceSensor.showMySensors().subscribe((o:any) => {
+      this.sensorArray = o
+      if (this.sensorArray.length == 0) {
+        this.sensorsInit = false
+      } else {
+        this.sensorsInit = true
+      }
+      console.log(this.sensorArray);
+      
     })
   }
+
+  
 
   locationSelected(location:String) {
     console.log('locationSelected():',location);

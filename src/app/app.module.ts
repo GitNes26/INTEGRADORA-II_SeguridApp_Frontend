@@ -10,8 +10,6 @@ import { LoginComponent } from './Components/Auth/login/login.component';
 import { RegisterComponent } from './Components/Auth/register/register.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { MonitoringComponent } from './Components/monitoring/monitoring.component';
-import { SensorsComponent } from './Components/sensors/sensors.component';
-import { LocationsComponent } from './Components/locations/locations.component';
 import { SettingsComponent } from './Components/settings/settings.component';
 import { MainComponent } from './Components/main/main.component';
 
@@ -23,8 +21,6 @@ import { MainComponent } from './Components/main/main.component';
     RegisterComponent,
     NotFoundComponent,
     MonitoringComponent,
-    SensorsComponent,
-    LocationsComponent,
     SettingsComponent,
     MainComponent,
   ],

@@ -16,6 +16,11 @@ export class LoginComponent implements OnInit {
   user:User
 
   constructor(private formBuilder:FormBuilder, private authService:AuthService, private router:Router) {
+    if (localStorage.getItem('myToken') != null) {
+      console.log('constructorMain');
+      
+      router.navigate(['/main'])
+    }
     this.buildForm()
    }
 

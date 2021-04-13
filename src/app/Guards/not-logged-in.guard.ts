@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class NotLoggedInGuard implements CanActivate {
   canActivate(): boolean {
-      if (localStorage.getItem('myToken') == null || localStorage.length == 0) {
+      if (localStorage.getItem('myToken') == null) {
         return true
       } else {
         return false
