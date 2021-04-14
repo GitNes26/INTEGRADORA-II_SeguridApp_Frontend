@@ -14,8 +14,6 @@ export class CheckLoginGuard implements CanActivate {
   
   canActivate(): boolean {
     if (localStorage.getItem('myToken') != null) {
-      // this.loggedIn = true
-      // this.goTo(this.loggedIn)
       return true
     } else {
       return false

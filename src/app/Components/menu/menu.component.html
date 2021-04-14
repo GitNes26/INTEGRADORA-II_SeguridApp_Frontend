@@ -1,18 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-sm-top ancho" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">| <span class="fw-lighter">Segurid</span><span class="fw-bold">App</span> |</a>
+    <a class="navbar-brand">| <span class="fw-lighter">Segurid</span><span class="fw-bold">App</span> |</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div *ngIf="sessionInit">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" routerLink='/main' routerLinkActive='active'>
-            Menu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink='/monitoring' routerLinkActive='active'>
+            <a class="nav-link" routerLink='' routerLinkActive='active'>
               <!-- <a class="nav-link" routerLink='/monitoring/{{location.name}}' routerLinkActive='active'> -->
             Monitoreo</a>
           </li>
@@ -24,16 +20,10 @@
         </ul>
       </div>
       <div class="d-flex ms-auto" *ngIf="sessionInit">
-        <!-- <div class="text-light fw-light fst-italic mx-2">{{user.name}}</div> -->
+        <div class="text-light fw-light fst-italic mx-2">{{username}}</div>
         <!-- <div class="text-light fw-light fst-italic mx-2">{{username}}</div> -->
         <button class="btn btn-outline-danger" aria-current="page" (click)='logout()'>
         Logout</button>
-      </div>
-      <div class="d-flex ms-auto" *ngIf="!sessionInit">
-        <button class="btn btn-outline-success" aria-current="page" routerLink='/login' routerLinkActive='active'>
-        Login</button>
-        <button class="btn btn-outline-light mx-1" routerLink='/register' routerLinkActive='active'>
-        Registro</button>
       </div>
       
       <!-- <form class="d-flex">

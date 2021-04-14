@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder:FormBuilder, private authService:AuthService, private router:Router) {
     if (localStorage.getItem('myToken') != null) {
       console.log('constructorMain');
-      
-      router.navigate(['/main'])
+      router.navigate([''])
     }
     this.buildForm()
    }
@@ -49,9 +48,8 @@ export class LoginComponent implements OnInit {
         timeMessage('Iniciando...', 1500).then(() => {
           successDialog('Bienvenido').then(() => {
             localStorage.setItem("myToken",data.token)
-            localStorage.setItem("email",this.user.email)
             console.log('dentro del metodo login de login', localStorage)
-            this.router.navigate(['/main'])
+            this.router.navigate([''])
             // window.location.reload()
           })
         })

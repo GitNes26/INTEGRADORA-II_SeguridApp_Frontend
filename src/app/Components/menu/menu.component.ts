@@ -20,17 +20,20 @@ export class MenuComponent implements OnInit {
 
   constructor( private authService:AuthService, private router:Router, private activatedRoute:ActivatedRoute, /*private path:Location*/ ) {
     if (localStorage.getItem('myToken') != null) {
-      this.authService.show().subscribe((o:any) => {
-        this.user = o
-        // this.username = String(localStorage.setItem('user',this.user.name))
-      })
       this.sessionInit = true
-      // this.rute = path.path()
       console.log('aqui en menu |',this.sessionInit, '| user:', this.user,'| ruta:',this.rute )
     }
+    this.profile()
   }
 
   ngOnInit(): void {
+  }
+
+  profile() {
+    this.authService.show().subscribe((o:any) => {
+      this.user = o
+      this.username = this.user.name      
+    })
   }
 
   logout() {

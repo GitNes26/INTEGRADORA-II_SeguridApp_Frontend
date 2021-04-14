@@ -32,12 +32,9 @@ export class MonitoringComponent implements OnInit {
       } else {
         this.sensorsInit = true
       }
-      console.log(this.sensorArray);
-      
+      // console.log(this.sensorArray);
     })
   }
-
-  
 
   locationSelected(location:String) {
     console.log('locationSelected():',location);
