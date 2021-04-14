@@ -1,7 +1,7 @@
 <app-menu></app-menu>
 
 <div class="container-fluid">
-    <div class="row my-4" *ngIf="sensorsInit">
+    <div class="row my-4" *ngIf="btnSensorsInit">
         <div class="col-3 border-end border-dark">
             <div class="sensors_area row justify-content-evenly text-center bg m-1 p-2">
                 <div class="col"> <!-- REPORTE DE TEMPERATURA-->
@@ -86,8 +86,8 @@
             </div>
         </div>
     </div>
-    <div center *ngIf="!sensorsInit">
-        <button class="btn btn-dark btn-lg fw-bold">
+    <div center *ngIf="!btnSensorsInit">
+        <button class="btn btn-outline-light btn-lg fw-bold btn-init rounded-pill" (click)="sensorsInit()">
             INICIAR SENSORES
         </button>
     </div>

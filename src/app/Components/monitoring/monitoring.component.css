@@ -25,3 +25,12 @@
     --s : 50px;
     height: var(--s);
 }
+
+.btn-init {
+    margin-left: 30vw;
+    margin-right: auto;
+    margin-top: 30vh;
+    height: 30vh;
+    width: 40vw;
+    font-size: xx-large;
+}

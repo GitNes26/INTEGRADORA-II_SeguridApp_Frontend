@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SensorService } from '../../Services/sensor.service';
 import { Sensor } from '../../Models/sensor';
+import { successDialog } from '../../Functions/Alerts';
 
 @Component({
   selector: 'app-monitoring',
@@ -13,7 +14,7 @@ export class MonitoringComponent implements OnInit {
 
   rute:String
   sensorArray:Sensor[] = []
-  sensorsInit = false
+  btnSensorsInit = false
 
   constructor( private serviceSensor:SensorService, private location:Location, private router:Router, private activatedRoute:ActivatedRoute) {
     this.showSensors()
@@ -28,18 +29,20 @@ export class MonitoringComponent implements OnInit {
     this.serviceSensor.showMySensors().subscribe((o:any) => {
       this.sensorArray = o
       if (this.sensorArray.length == 0) {
-        this.sensorsInit = false
+        this.btnSensorsInit = false
       } else {
-        this.sensorsInit = true
+        this.btnSensorsInit = true
       }
       // console.log(this.sensorArray);
     })
   }
 
-  locationSelected(location:String) {
-    console.log('locationSelected():',location);
-    // this.router.navigate([location])
-    
+  sensorsInit() {
+    this.serviceSensor.add().subscribe( () => {
+      successDialog('Sensores Iniciados').then( () => {
+        this.showSensors()
+      })
+    })
   }
 
 }
