@@ -17,7 +17,7 @@ export class SensorService {
   }
 
   add() {
-    console.log('estamos en el sevicio sensorAdd:')
+    console.log('estamos en el sevicio sensorAdd:', this.header)
     return this.http.post(`${this.apiURL}api/sensor`, {headers:this.header})
   }
 

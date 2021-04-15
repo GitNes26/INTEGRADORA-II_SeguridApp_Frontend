@@ -1,0 +1,77 @@
+<app-menu></app-menu>
+
+<div class="container-fluid">
+    <div class="row container-fluid mt-3">
+        <div class="col-4 card text-light bg p-4">
+            <h1 class="display-2 fw-bold mb-5 text-center">PERFIL</h1>
+            <div *ngIf="!updated">
+                <table class="table text-light mb-5">
+                    <tbody class="fs-4">
+                        <tr><th>Nombre:</th><td>{{name}}</td></tr>
+                        <tr><th>Apellido:</th><td>{{last_name}}</td></tr>
+                        <tr><th>Edad:</th><td>{{age}} años</td></tr>
+                        <tr><th>Celular:</th><td>{{cel}}</td></tr>
+                        <tr><th>Correo:</th><td>{{email}}</td></tr>
+                        <!-- <tr><th>Contraseña:</th><td>{{password}}</td></tr> -->
+                    </tbody>
+                </table>
+                <button class="btn btn-primary fw-bold" (click)="edit()">
+                    Editar <i class="fas fa-pen fa-sm"></i>
+                </button>
+            </div>
+            <form *ngIf="updated" [formGroup]="formG" novalidate> <!-- FORMULARIO PARA EDITAR DATOS DE USUARIO -->
+                <table class="table text-light mb-5">
+                    <tbody class="fs-4">
+                        <tr><th>Nombre:</th><td><input class="form-control bg-transparent text-light" type="text" formControlName="name" [class.is-invalid]="validateTextField('name')"><div *ngIf="validateErrorTextField('name')">
+                            <small class="badge alert-danger" *ngIf="formG.get('name').hasError('required')">
+                                Este es un campo requerido.
+                            </small></div>
+                        </td></tr>
+                        <tr><th>Apellido:</th><td><input class="form-control bg-transparent text-light" type="text" formControlName="last_name" [class.is-invalid]="validateTextField('last_name')"><div *ngIf="validateErrorTextField('last_name')">
+                            <small class="badge alert-danger" *ngIf="formG.get('last_name').hasError('required')">
+                                Este es un campo requerido.
+                            </small></div>
+                        </td></tr>
+                        <tr><th>Edad:</th><td><input class="form-control bg-transparent text-light" type="number" formControlName="age" [class.is-invalid]="validateTextField('age')"><div *ngIf="validateErrorTextField('age')">
+                            <small class="badge alert-danger" *ngIf="formG.get('age').hasError('required')">
+                                Este es un campo requerido.
+                            </small></div></td></tr>
+                        <tr><th>Celular:</th><td><input class="form-control bg-transparent text-light" type="text" formControlName="cel" [class.is-invalid]="validateTextField('cel')"><div *ngIf="validateErrorTextField('cel')">
+                            <small class="badge alert-danger" *ngIf="formG.get('cel').hasError('required')">
+                                Este es un campo requerido.
+                            </small></div></td></tr>
+                        <tr><th>Correo:</th><td><input class="form-control bg-transparent text-light" type="text" formControlName="email" [class.is-invalid]="validateTextField('email')"><div *ngIf="validateErrorTextField('email')">
+                            <small class="badge alert-danger" *ngIf="formG.get('email').hasError('required')">
+                                Este es un campo requerido.
+                            </small></div></td></tr>
+                        <!-- <tr><th>Contraseña:</th><td><input class="form-control bg-transparent text-light" type="text" formControlName="password" [class.is-invalid]="validateTextField('password')"><div *ngIf="validateErrorTextField('password')">
+                            <small class="badge alert-danger" *ngIf="formG.get('password').hasError('required')">
+                                Este es un campo requerido.
+                            </small></div></td></tr> -->
+                    </tbody>
+                </table>
+                <button class="btn btn-success fw-bold" (click)="update()">
+                    Guardar <i class="fas fa-pen fa-sm"></i>
+                </button>
+            </form>
+            <br><br><br><br>
+            <small class="text-center">Equipo 4 | Segurid<b>App</b></small>
+        </div>
+        <div class="col card text-light bg p-4">
+            <h1 class="display-2 fw-bold mb-5 text-center">INFO SENSORES</h1>
+            <p class="lead fs-2">Este dispositivo cuenta con 3 sensores para poder
+                tenerte informado de los acontecimientos en tiempo real y un led
+                RGB indicativo.</p>
+                <ol class="ml-5 lead fs-3">
+                    <li *ngFor="let sensor of sensorArray"><b>{{sensor.name}} - </b>{{sensor.description}}</li>
+                </ol>
+            <hr>
+            <div class="d-flex justify-content-evenly">
+                <img src="assets\images\camara_seguridad.png" alt="Camara" class="rounded float-start mx-2 mt-5" style="width: 100px;">
+                <img src="assets\images\sensor_PIR.png" alt="Sensor PIR" class="rounded float-start mx-2" style="width: 150px;">
+                <img src="assets\images\sensor_Proximidad.png" alt="Sensor presencia" class="rounded float-start mx-2" style="width: 100px;">
+                <img src="assets\images\sensor_temperature.png" alt="Sensor Tem&Hum" class="rounded float-start mx-2 mt-5" style="width: 100px;">
+            </div>
+        </div>
+    </div>
+</div>

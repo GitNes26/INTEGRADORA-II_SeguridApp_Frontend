@@ -44,7 +44,7 @@
                         <div class="col-3">
                             <div class="form-floating mb-3"> <!-- EDAD -->
                                 <input class='form-control mt-3' type="number" formControlName="age" id="floatingAge" placeholder="Edad"
-                                [class.is-invalid]="validateTextField('age')">
+                                [class.is-invalid]="validateTextField('age')" min="18">
                                 <label for="floatingAge">Edad</label>
                                 <div *ngIf="validateErrorTextField('age')">
                                     <small class="badge alert-danger" *ngIf="formG.get('age').hasError('required')">
@@ -56,11 +56,16 @@
                         <div class="col-md">
                             <div class="form-floating mb-3"> <!-- No. CELULAR -->
                                 <input class='form-control mt-3' type="text" formControlName="cel" id="floatinCel" placeholder="Numero celular"
-                                [class.is-invalid]="validateTextField('cel')">
+                                [class.is-invalid]="validateTextField('cel')" minlength="10" maxlength="10">
                                 <label for="floatinCel">Numero celular</label>
                                 <div *ngIf="validateErrorTextField('cel')">
                                     <small class="badge alert-danger" *ngIf="formG.get('cel').hasError('required')">
                                         Este es un campo requerido.
+                                    </small>
+                                </div>
+                                <div *ngIf="validateErrorTextField('cel')">
+                                    <small class="badge alert-danger" *ngIf="formG.get('cel').hasError('pattern')">
+                                        Ingresa tu número a 10 dígitos.
                                     </small>
                                 </div>
                             </div>

@@ -4,6 +4,7 @@ import { errorMessage, successDialog, timeMessage } from '../../../Functions/Ale
 import { User } from '../../../Models/user';
 import { AuthService } from '../../../Services/auth.service';
 import { Router } from '@angular/router';
+import { SensorService } from '../../../Services/sensor.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   formG:FormGroup
   user:User
 
-  constructor(private formBuilder:FormBuilder, private authService:AuthService, private router:Router) {
+  constructor(private formBuilder:FormBuilder, private authService:AuthService, private sensorService:SensorService, private router:Router) {
     this.buildForm()
    }
 
@@ -26,8 +27,8 @@ export class RegisterComponent implements OnInit {
     this.formG = this.formBuilder.group({
       name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
-      age: ['', [Validators.required]],
-      cel: ['', [Validators.required]],
+      age: ['18', [Validators.required, Validators.min(18)]],
+      cel: ['', [Validators.required, Validators.pattern('[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')]],
       email: ['', [Validators.required, Validators.email]],
       pwd: ['', [Validators.required, Validators.minLength(3)]],
       pwd2: ['', [Validators.required]],
@@ -54,10 +55,11 @@ export class RegisterComponent implements OnInit {
       this.setData()
       this.authService.register(this.user).subscribe((data:any) => {
         timeMessage('Registrando...',1500).then(() => {
-          successDialog('Registro Completado')
-          this.router.navigate(['/login'])
+        successDialog('Registro Completado')
+        this.router.navigate(['/login'])
         })
       }, error => {
+        console.log(error);
         errorMessage('Ha ocurrido un error')
       })
       

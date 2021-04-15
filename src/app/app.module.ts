@@ -10,7 +10,7 @@ import { LoginComponent } from './Components/Auth/login/login.component';
 import { RegisterComponent } from './Components/Auth/register/register.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { MonitoringComponent } from './Components/monitoring/monitoring.component';
-import { SettingsComponent } from './Components/settings/settings.component';
+import { InfoComponent } from './Components/info/info.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { SettingsComponent } from './Components/settings/settings.component';
     RegisterComponent,
     NotFoundComponent,
     MonitoringComponent,
-    SettingsComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

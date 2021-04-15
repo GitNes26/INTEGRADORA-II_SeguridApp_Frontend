@@ -33,14 +33,14 @@ export class MonitoringComponent implements OnInit {
       } else {
         this.btnSensorsInit = true
       }
-      // console.log(this.sensorArray);
+      console.log('showSensors',this.btnSensorsInit,this.sensorArray);
     })
   }
 
   sensorsInit() {
-    this.serviceSensor.add().subscribe( () => {
+    this.serviceSensor.add().subscribe( (o:any) => {
       successDialog('Sensores Iniciados').then( () => {
-        this.showSensors()
+        // this.showSensors()
       })
     })
   }
