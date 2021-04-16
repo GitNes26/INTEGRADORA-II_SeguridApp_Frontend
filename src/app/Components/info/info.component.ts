@@ -35,7 +35,6 @@ export class InfoComponent implements OnInit {
   }
 
   private buildForm() {
-
     this.formG = this.formBuilder.group({
       name: [this.name, [Validators.required]],
       last_name: [this.last_name, [Validators.required]],
@@ -88,10 +87,11 @@ export class InfoComponent implements OnInit {
         timeMessage('Actualizando...',1500).then(() => {
           successDialog('Datos Actualizados')
           this.updated = true
-          this.router.navigate(['/info'])
+          location.reload()
         })
       })
     }
   }
+  notUpdated() { this.updated = false }
 
 }

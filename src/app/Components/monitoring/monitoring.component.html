@@ -19,10 +19,10 @@
                             <img src="assets\SVG\temperatura.svg" alt="termo" class="image">  
                         </div>
                         <div class="col"> <!-- DATO MÁX-->
-                            <span class="ml-4 fs-1 fw-bold text-light">23</span>
+                            <span class="ml-4 fs-1 fw-bold text-light">{{tempMax}}</span>
                         </div>
                         <div class="col"> <!-- DATO MÍN-->
-                            <span class="ml-4 fs-1 fw-bold text-light">18</span>
+                            <span class="ml-4 fs-1 fw-bold text-light">{{tempMin}}</span>
                         </div>
                     </div>
                     <div class="row"> <!-- HUMEDAD -->
@@ -49,19 +49,27 @@
                         <div class="col"> <!-- DATO-->
                             <span class="ml-4 fs-1 fw-bold text-light">Presencias Registradas</span>
                             <br>
-                            <span class="ml-4 fs-1 fw-light text-light">3</span>
+                            <span class="ml-4 fs-1 fw-light text-light">{{presenceCounter}}</span>
                         </div>
                     </div>
                 </div>
             </div>
             <hr class="bg-light py-1 my-4">
             <div class="sensors_area row justify-content-evenly text-center bg m-1 p-2">
-                <div class="col">
-                    <span class="ml-4 fs-1 fw-bold text-light">Tiempo Activo</span>
+                <div class="col"> <!-- BOTON TOGGLE -->
+                    <div class="toggle rounded-pill" [@bgToggle]="toggleActived ?  'actived' : 'desactived'" (click)=animateToggle()>
+                        <div class="button bg-light rounded-circle position-relative" [@toggle]="toggleActived ?  'actived' : 'desactived'"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- <hr class="bg-light py-1 my-4">
+            <div class="sensors_area row justify-content-evenly text-center bg m-1 p-2">
+                <div class="col"> <!- TIEMPO ACTIVO ->
+                    <span class="ml-4 fs-1 fw-bold text-light">Tiempo Actívo</span>
                     <br>
                     <span class="ml-4 fs-1 fw-light text-light">7:44 hrs</span>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="col">
             <div class="cam-area text-light text-center">

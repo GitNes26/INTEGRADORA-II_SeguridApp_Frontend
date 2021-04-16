@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
   constructor( private authService:AuthService, private router:Router, private activatedRoute:ActivatedRoute, /*private path:Location*/ ) {
     if (localStorage.getItem('myToken') != null) {
       this.sessionInit = true
-      console.log('aqui en menu |',this.sessionInit, '| user:', this.user,'| ruta:',this.rute )
+      // console.log('aqui en menu |',this.sessionInit, '| user:', this.user,'| ruta:',this.rute )
     }
     this.profile()
   }
@@ -42,6 +42,7 @@ export class MenuComponent implements OnInit {
       this.sessionInit = false
       this.navBarActive = false
       this.router.navigate(['/login'])
+      location.reload()
     })
   }
 
