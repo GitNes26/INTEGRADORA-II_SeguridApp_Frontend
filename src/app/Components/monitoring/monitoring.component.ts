@@ -6,45 +6,29 @@ import { Sensor } from '../../Models/sensor';
 import { successDialog } from '../../Functions/Alerts';
 import { ResultService } from '../../Services/result.service';
 import { Result } from '../../Models/result';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { triggerBgToggle, triggerToggle } from '../../Animations/animations';
+import Ws from '@adonisjs/websocket-client'
 
 @Component({
   selector: 'app-monitoring',
   templateUrl: './monitoring.component.html',
   styleUrls: ['./monitoring.component.css'],
-  animations: [ triggerBgToggle, triggerToggle
-    // trigger('bgToggle', [
-    //   state('actived', style({
-    //       backgroundColor: '#198754'
-    //   })),
-    //   state('desactived', style({
-    //       backgroundColor: '#DC3545'
-    //   })),
-    //   transition('actived <=> desactived', [
-    //       animate('0.6s cubic-bezier(.075, 0.82, 0.165, 1)')
-    //   ])
-    // ]),
-    // trigger('toggle', [
-    //   state('active', style({
-    //       left: '60%',
-    //   })),
-    //   state('desactived', style({
-    //       left: '5%',
-    //   })),
-    //   transition('actived <=> desactived', [
-    //     animate('0.6s cubic-bezier(.075, 0.82, 0.165, 1)')
-    //   ])
-    // ])
-  ]
+  animations: [ triggerBgToggle, triggerToggle ]
 })
 
 export class MonitoringComponent implements OnInit {
 
   rute:String
   sensorArray:Sensor[] = []
-  btnSensorsInit = false
+  // btnSensorsInit = false
+  ws:any
+  channel:any
+  value:any
   result:Result
+  tempSensor:any
+  humSensor:any
+  pirSensor:any
+  ultraSensor:any
   tempMax:number = 0
   tempMin:number = 0
   humMax:number = 0
@@ -54,23 +38,46 @@ export class MonitoringComponent implements OnInit {
   toggleActived = true
 
   constructor( private serviceSensor:SensorService, private resultService:ResultService) {
-    this.showSensors()
     this.showQuerys()
   }
 
   ngOnInit(): void {
-  }
-
-  showSensors() {
-    this.serviceSensor.showMySensors().subscribe((o:any) => {
-      this.sensorArray = o
-      if (this.sensorArray.length == 0) {
-        this.btnSensorsInit = false
-      } else {
-        this.btnSensorsInit = true
-      }
-      // console.log('showSensors',this.btnSensorsInit,this.sensorArray);
+    this.ws = Ws('ws://127.0.0.1:3333', {
+      path:'seguridapp'
     })
+    this.ws.connect()
+    this.connectSocket('tempData',this.tempSensor)
+    this.connectSocket('humData',this.humSensor)
+    this.connectSocket('pirData',this.pirSensor)
+    this.connectSocket('ultraData',this.ultraSensor)
+  }
+  connectSocket(topic:string, sensorValue) {
+    this.channel = this.ws.subscribe(topic)
+    
+    this.channel.on('dataSensor',(data:any) => {
+      sensorValue = data
+    })
+  }
+  temp() {
+    this.channel.emit('dataSensor', this.value)
+    this.tempSensor = this.value
+    this.value = ""
+  }
+  hum() {
+    this.channel.emit('dataSensor', this.value)
+    this.humSensor = this.value
+    this.value = ""
+  }
+  pir() {
+    this.channel.emit('dataSensor', this.value)
+    if (this.value == true) { this.pirSensor = 'Hay Movimiento'}
+    if (this.value == false) { this.pirSensor = 'Área Segura'  }
+    this.value = ""
+  }
+  ultra() {
+    this.channel.emit('dataSensor', this.value)
+    this.ultraSensor = this.value
+    this.value = ""
   }
 
   showQuerys() {

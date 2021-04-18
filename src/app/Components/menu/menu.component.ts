@@ -42,7 +42,7 @@ export class MenuComponent implements OnInit {
       this.sessionInit = false
       this.navBarActive = false
       this.router.navigate(['/login'])
-      location.reload()
+      // location.reload()
     })
   }
 
