@@ -6,14 +6,14 @@ import { Sensor } from '../../Models/sensor';
 import { successDialog, toastN } from '../../Functions/Alerts';
 import { ResultService } from '../../Services/result.service';
 import { Result } from '../../Models/result';
-import { triggerBtnReload } from '../../Animations/animations';
+import { triggerBtnReload, triggerMotionDetected } from '../../Animations/animations';
 import Ws from '@adonisjs/websocket-client'
 
 @Component({
   selector: 'app-monitoring',
   templateUrl: './monitoring.component.html',
   styleUrls: ['./monitoring.component.css'],
-  animations: [ triggerBtnReload ]
+  animations: [ triggerBtnReload, triggerMotionDetected ]
 })
 
 export class MonitoringComponent implements OnInit {
@@ -35,6 +35,7 @@ export class MonitoringComponent implements OnInit {
   presenceCounter:number = 0
 
   clickReload = true
+  motionWasDetected = false
   timeNow: number;
   now: string;
 
@@ -71,8 +72,12 @@ export class MonitoringComponent implements OnInit {
   }
   pir() {
     this.channel.emit('dataSensor', this.value)
-    if (this.value == true) { this.pirSensor = 'Hay Movimiento'}
-    if (this.value == false) { this.pirSensor = 'Área Segura'  }
+    if (this.value == true) { 
+      this.motionWasDetected = true
+      this.pirSensor = 'Hay Movimiento'}
+    if (this.value == false) { 
+      this.motionWasDetected = false
+      this.pirSensor = 'Área Segura'  }
     this.value = ""
   }
   ultra() {
@@ -104,5 +109,4 @@ export class MonitoringComponent implements OnInit {
     this.timeNow = Date.now()
     this.now = formatDate(this.timeNow, 'dd-MMMM-yy hh:mm:ss a','en-US', '+052-')    
   }
-
 }

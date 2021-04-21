@@ -10,7 +10,9 @@
     --s : 50px;
     height: var(--s);
 }
-
+.alert { 
+    padding: 1%;
+    background-color: rgba(223, 43, 43, 0);}
 .btn-reload {
     transition: 0.6s;
 }

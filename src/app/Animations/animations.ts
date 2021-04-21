@@ -47,3 +47,37 @@ export const triggerBtnReload =
             )
         ])
     ])
+
+export const triggerMotionDetected =
+    trigger('motionDetected', [
+        state('motionless', style({
+            backgroundColor: 'rgba(223, 43, 43, 0)'
+        })),
+        state('motion', style({
+            backgroundColor:'rgb(223, 43, 43)'
+        })),
+        transition('motionless => motion', [
+            animate('3s',
+                keyframes([
+                    style({ backgroundColor:'rgba(223, 43, 43, 0)', offset:0}),
+                    style({ backgroundColor:'rgb(223, 43, 43)', offset:0.1}),
+                    style({ backgroundColor:'rgba(223, 43, 43, 0)', offset:0.2}),
+                    style({ backgroundColor:'rgb(223, 43, 43)', offset:0.3}),
+                    style({ backgroundColor:'rgba(223, 43, 43, 0)', offset:0.4}),
+                    style({ backgroundColor:'rgb(223, 43, 43)', offset:0.5}),
+                    style({ backgroundColor:'rgba(223, 43, 43, 0)', offset:0.6}),
+                    style({ backgroundColor:'rgb(223, 43, 43)', offset:0.7}),
+                    style({ backgroundColor:'rgba(223, 43, 43, 0)', offset:0.8}),
+                    style({ backgroundColor:'rgb(223, 43, 43)', offset:1}),
+                ])
+            )
+        ]),
+        transition('motion => motionless', [
+            animate('0.6s ease-in-out',
+                keyframes([
+                    style({ backgroundColor:'rgb(223, 43, 43)', offset:0}),
+                    style({ backgroundColor:'rgba(223, 43, 43, 0)', offset:1}),
+                ])
+            )
+        ])
+    ])

@@ -41,7 +41,7 @@
             </div>
             <hr class="bg-light py-1 my-4">
             <div class="sensors_area row justify-content-between text-center bg m-1 p-2">
-                <div class="col"> <!-- REPORTE DE PRESENCIA-->
+                <div class="col"> <!-- REPORTE DE PRESENCIAS-->
                     <div class="row">
                         <div class="col-1 pt-5"> <!-- IMAGEN-->
                             <img src="assets\SVG\sensor_movimiento.svg" alt="movimiento" class="image">
@@ -75,14 +75,14 @@
         <div class="col">
             <div class="cam-area text-light text-center">
                 <img src="assets\images\Backgrounds\fondo_cochera_web.jpg" class="card-img-top border border-5 rounded-3" alt="Locacion" style="width: 72%;">
-                <input type="text" [(ngModel)]="value" placeholder="temperatura">
+                <!-- <input type="text" [(ngModel)]="value" placeholder="temperatura">
                 <button class="btn btn-primary" (click)="temp()"></button>
                 <input type="text" [(ngModel)]="value" placeholder="humedad">
-                <button class="btn btn-primary" (click)="hum()"></button>
+                <button class="btn btn-primary" (click)="hum()"></button> -->
                 <input type="text" [(ngModel)]="value" placeholder="movimiento">
                 <button class="btn btn-primary" (click)="pir()"></button>
-                <input type="text" [(ngModel)]="value" placeholder="distancia">
-                <button class="btn btn-primary" (click)="ultra()"></button>
+                <!-- <input type="text" [(ngModel)]="value" placeholder="distancia">
+                <button class="btn btn-primary" (click)="ultra()"></button> -->
             </div>
             <div class="sensors_area row justify-content-evenly text-center bg m-1 p-2">
                 <div class="col border-start border-end border-light">
@@ -93,12 +93,14 @@
                     <span class="ml-4 fs-1 fw-light text-light">{{humSensor}}</span>
                 </div>
                 <div class="col border-end border-light">
-                    <img src="assets\SVG\sensor_movimiento.svg" alt="movimiento" class="image"> <br>
-                    <span class="ml-4 fs-1 fw-bold text-light">{{pirSensor}}</span>
+                    <div class="alert" [@motionDetected]="motionWasDetected ? 'motion' : 'motionless'">
+                        <img src="assets\SVG\sensor_movimiento.svg" alt="movimiento" class="image"> <br>
+                        <span class="ml-4 fs-1 fw-bold text-light">{{pirSensor}}</span>
+                    </div>
                 </div>
                 <div class="col border-end border-light">
                     <img src="assets\SVG\sensor_proximidad_cinta_metrica.svg" alt="movimiento" class="image"> <br>
-                    <span class="ml-4 fs-1 fw-bold text-light">{{ultraSensor}} mts</span>
+                    <span class="ml-4 fs-1 fw-bold text-light">{{ultraSensor}} cms</span>
                 </div>
             </div>
         </div>
