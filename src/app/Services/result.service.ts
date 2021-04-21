@@ -25,4 +25,8 @@ export class ResultService {
   presenceCounter() {
     return this.http.get(`${this.apiURL}api/result/presenceCounter`, {headers:this.header})
   }
+
+  deleteHistory() {
+    return this.http.delete(`${this.apiURL}api/result`, {headers: this.header})
+  }
 }

@@ -1,44 +1,45 @@
-import { Location, NgClass } from '@angular/common';
+import { formatDate, Location, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SensorService } from '../../Services/sensor.service';
 import { Sensor } from '../../Models/sensor';
-import { successDialog } from '../../Functions/Alerts';
+import { successDialog, toastN } from '../../Functions/Alerts';
 import { ResultService } from '../../Services/result.service';
 import { Result } from '../../Models/result';
-import { triggerBgToggle, triggerToggle } from '../../Animations/animations';
+import { triggerBtnReload } from '../../Animations/animations';
 import Ws from '@adonisjs/websocket-client'
 
 @Component({
   selector: 'app-monitoring',
   templateUrl: './monitoring.component.html',
   styleUrls: ['./monitoring.component.css'],
-  animations: [ triggerBgToggle, triggerToggle ]
+  animations: [ triggerBtnReload ]
 })
 
 export class MonitoringComponent implements OnInit {
 
   rute:String
   sensorArray:Sensor[] = []
-  // btnSensorsInit = false
   ws:any
   channel:any
   value:any
   result:Result
-  tempSensor:any
-  humSensor:any
-  pirSensor:any
-  ultraSensor:any
+  tempSensor:any = 0
+  humSensor:any = 0
+  pirSensor:any = 'Área Segura'
+  ultraSensor:any = 0
   tempMax:number = 0
   tempMin:number = 0
   humMax:number = 0
   humMin:number = 0
   presenceCounter:number = 0
 
-  toggleActived = true
+  clickReload = true
+  timeNow: number;
+  now: string;
 
-  constructor( private serviceSensor:SensorService, private resultService:ResultService) {
-    this.showQuerys()
+  constructor( private resultService:ResultService) {
+    // this.showQuerys()
   }
 
   ngOnInit(): void {
@@ -83,27 +84,25 @@ export class MonitoringComponent implements OnInit {
   showQuerys() {
     this.resultService.tempMax().subscribe((o:any) => {
       this.result = o[0]
-      this.tempMax = this.result.data      
+      this.tempMax = this.result.data
+      toastN()
     })
     this.resultService.tempMin().subscribe((o:any) => {
       this.result = o[0]
       this.tempMin = this.result.data
+      toastN()
     })
     this.resultService.presenceCounter().subscribe((o:any) => {
       this.presenceCounter = o[0].presencias
-    })
-  }
-
-  sensorsInit() {
-    this.serviceSensor.add().subscribe( (o:any) => {
-      successDialog('Sensores Iniciados').then( () => {
-        
-      })
+      toastN()
     })
   }
 
   animateToggle() {
-    this.toggleActived = !this.toggleActived
+    this.clickReload = !this.clickReload
+    this.showQuerys()
+    this.timeNow = Date.now()
+    this.now = formatDate(this.timeNow, 'dd-MMMM-yy hh:mm:ss a','en-US', '+052-')    
   }
 
 }

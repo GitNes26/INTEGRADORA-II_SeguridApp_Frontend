@@ -1,5 +1,23 @@
 import Swal from "sweetalert2";
-// import Swal from 'sweetalert2/dist/sweetalert2.js';
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-left',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
+
+export function toastN() {
+    return Toast.fire({
+        icon: 'success',
+        title: 'Datos refrescados'
+    })
+}
 
 export function successDialog(msg: string) {
     return Swal.fire({

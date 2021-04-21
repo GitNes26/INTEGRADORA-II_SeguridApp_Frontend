@@ -30,10 +30,10 @@
                             <img src="assets\SVG\humidity.svg" alt="termo" class="image">  
                         </div>
                         <div class="col">
-                            <span class="ml-4 fs-1 fw-light text-light">5</span>
+                            <span class="ml-4 fs-1 fw-light text-light">{{humMax}}</span>
                         </div>
                         <div class="col">
-                            <span class="ml-4 fs-1 fw-light text-light">3</span>
+                            <span class="ml-4 fs-1 fw-light text-light">{{humMin}}</span>
                         </div>
                     </div>
                     <br>
@@ -55,16 +55,17 @@
                 </div>
             </div>
             <hr class="bg-light py-1 my-4">
-            <div class="sensors_area row justify-content-evenly text-center bg m-1 p-2">
-                <div class="col"> <!-- BOTON TOGGLE -->
-                    <div class="toggle rounded-pill" [@bgToggle]="toggleActived ?  'actived' : 'desactived'" (click)=animateToggle()>
-                        <div class="button bg-light rounded-circle position-relative" [@toggle]="toggleActived ?  'actived' : 'desactived'"></div>
-                    </div>
+            <div class="row text-center">
+                <div class="col"> <!-- BOTON RECARGAR CONSULTAS -->
+                    <button class="btn btn-dark fs-4 fw-bold rounded-pill" (click)=animateToggle()>Refrescar consultas
+                    <img src="assets\SVG\redo-alt-solid.svg" class="btn-reload" alt="reload" style="width:20%;"
+                    [@reload]="clickReload ?  'hover' : 'click'"></button>
+                    <small class="badge bg-light text-dark rounded-pill">Ultima actualización: {{now}}</small>
                 </div>
             </div>
-            <!-- <hr class="bg-light py-1 my-4">
+            <!-- <hr class="bg-light py-1 my-4"> <!- TIEMPO ACTIVO ->
             <div class="sensors_area row justify-content-evenly text-center bg m-1 p-2">
-                <div class="col"> <!- TIEMPO ACTIVO ->
+                <div class="col">
                     <span class="ml-4 fs-1 fw-bold text-light">Tiempo Actívo</span>
                     <br>
                     <span class="ml-4 fs-1 fw-light text-light">7:44 hrs</span>
@@ -102,9 +103,4 @@
             </div>
         </div>
     </div>
-    <!-- <div *ngIf="!btnSensorsInit">
-        <button class="btn btn-outline-light btn-lg fw-bold btn-init rounded-pill" (click)="sensorsInit()">
-            INICIAR SENSORES
-        </button>
-    </div> -->
 </div>

@@ -6,44 +6,15 @@
     background: #20202050;
 }
 
-.locations {
-    height: 87vh;
-}
-
-.locations::-webkit-scrollbar{ 
-    width: 2px;
-}
-.locations::-webkit-scrollbar-thumb {
-    background-color: #202020;
-    border-radius: 20px;
-}
-.locations::-webkit-scrollbar-track {
-    border-radius: 10px;
-}
-
 .image {
     --s : 50px;
     height: var(--s);
 }
 
-.btn-init {
-    margin-left: 30vw;
-    margin-right: auto;
-    margin-top: 30vh;
-    height: 30vh;
-    width: 40vw;
-    font-size: xx-large;
+.btn-reload {
+    transition: 0.6s;
 }
-
-.toggle {
-    --h: 16vh; --w: 18vw;
-    height: var(--h); width: 20vw;
+.btn-reload:hover {
+    transform: scale(.95) rotate(10deg);
     cursor: pointer;
-    background-color: #198754;
-    transition: all;
-}
-.button {
-    height: 15vh; width: 15vh;
-    top: 3%; left: 60%;
-    transition: all;
 }
