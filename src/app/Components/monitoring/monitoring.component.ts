@@ -6,14 +6,14 @@ import { Sensor } from '../../Models/sensor';
 import { successDialog, toastN } from '../../Functions/Alerts';
 import { ResultService } from '../../Services/result.service';
 import { Result } from '../../Models/result';
-import { triggerBtnReload, triggerMotionDetected } from '../../Animations/animations';
+import { triggerBtnRefresh, triggerMotionDetected } from '../../Animations/animations';
 import Ws from '@adonisjs/websocket-client'
 
 @Component({
   selector: 'app-monitoring',
   templateUrl: './monitoring.component.html',
   styleUrls: ['./monitoring.component.css'],
-  animations: [ triggerBtnReload, triggerMotionDetected ]
+  animations: [ triggerBtnRefresh, triggerMotionDetected ]
 })
 
 export class MonitoringComponent implements OnInit {
@@ -34,24 +34,28 @@ export class MonitoringComponent implements OnInit {
   humMin:number = 0
   presenceCounter:number = 0
 
-  clickReload = true
-  motionWasDetected = false
+  clickRefresh = true
+  motionDetected = false
   timeNow: number;
   now: string;
 
   constructor( private resultService:ResultService) {
-    // this.showQuerys()
   }
 
   ngOnInit(): void {
-    this.ws = Ws('ws://127.0.0.1:3333', {
+    // this.ws = Ws('ws://127.0.0.1:3333', {
+    this.ws = Ws('ws://cisco16.tk', {
       path:'seguridapp'
     })
     this.ws.connect()
-    this.connectSocket('tempData',this.tempSensor)
-    this.connectSocket('humData',this.humSensor)
-    this.connectSocket('pirData',this.pirSensor)
-    this.connectSocket('ultraData',this.ultraSensor)
+    // this.connectSocket('tempData',this.tempSensor)
+    // this.connectSocket('humData',this.humSensor)
+    // this.connectSocket('pirData',this.pirSensor)
+    // this.connectSocket('ultraData',this.ultraSensor)
+    this.connectSocket('temperatura',this.tempSensor)
+    this.connectSocket('humedad',this.humSensor)
+    this.connectSocket('pir',this.pirSensor)
+    this.connectSocket('ultrasonico',this.ultraSensor)
   }
   connectSocket(topic:string, sensorValue) {
     this.channel = this.ws.subscribe(topic)
@@ -73,10 +77,10 @@ export class MonitoringComponent implements OnInit {
   pir() {
     this.channel.emit('dataSensor', this.value)
     if (this.value == true) { 
-      this.motionWasDetected = true
+      this.motionDetected = true
       this.pirSensor = 'Hay Movimiento'}
     if (this.value == false) { 
-      this.motionWasDetected = false
+      this.motionDetected = false
       this.pirSensor = 'Área Segura'  }
     this.value = ""
   }
@@ -103,8 +107,8 @@ export class MonitoringComponent implements OnInit {
     })
   }
 
-  animateToggle() {
-    this.clickReload = !this.clickReload
+  animateRefresh() {
+    this.clickRefresh = !this.clickRefresh
     this.showQuerys()
     this.timeNow = Date.now()
     this.now = formatDate(this.timeNow, 'dd-MMMM-yy hh:mm:ss a','en-US', '+052-')    

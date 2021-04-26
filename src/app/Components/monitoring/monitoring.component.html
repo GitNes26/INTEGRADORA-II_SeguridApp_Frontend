@@ -57,9 +57,9 @@
             <hr class="bg-light py-1 my-4">
             <div class="row text-center">
                 <div class="col"> <!-- BOTON RECARGAR CONSULTAS -->
-                    <button class="btn btn-dark fs-4 fw-bold rounded-pill" (click)=animateToggle()>Refrescar consultas
+                    <button class="btn btn-dark fs-4 fw-bold rounded-pill" (click)=animateRefresh()>Refrescar consultas
                     <img src="assets\SVG\redo-alt-solid.svg" class="btn-reload" alt="reload" style="width:20%;"
-                    [@reload]="clickReload ?  'hover' : 'click'"></button>
+                    [@refresh]="clickRefresh ?  'hover' : 'click'"></button>
                     <small class="badge bg-light text-dark rounded-pill">Ultima actualización: {{now}}</small>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                     <span class="ml-4 fs-1 fw-light text-light">{{humSensor}}</span>
                 </div>
                 <div class="col border-end border-light">
-                    <div class="alert" [@motionDetected]="motionWasDetected ? 'motion' : 'motionless'">
+                    <div class="alert" [@motionDetected]="motionDetected ? 'motion' : 'motionless'">
                         <img src="assets\SVG\sensor_movimiento.svg" alt="movimiento" class="image"> <br>
                         <span class="ml-4 fs-1 fw-bold text-light">{{pirSensor}}</span>
                     </div>
