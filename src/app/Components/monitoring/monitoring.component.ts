@@ -45,50 +45,70 @@ export class MonitoringComponent implements OnInit {
   ngOnInit(): void {
     // this.ws = Ws('ws://127.0.0.1:3333', {
     this.ws = Ws('ws://cisco16.tk', {
-      path:'seguridapp'
+      path:'seguridapp/?token='+localStorage.getItem('myToken')
     })
     this.ws.connect()
     // this.connectSocket('tempData',this.tempSensor)
     // this.connectSocket('humData',this.humSensor)
     // this.connectSocket('pirData',this.pirSensor)
     // this.connectSocket('ultraData',this.ultraSensor)
-    this.connectSocket('temperatura',this.tempSensor)
-    this.connectSocket('humedad',this.humSensor)
-    this.connectSocket('pir',this.pirSensor)
-    this.connectSocket('ultrasonico',this.ultraSensor)
+    this.temp()
+    this.hum()
+    this.pir()
+    this.ultra()
+
+    // this.connectSocket('temperatura',this.tempSensor)
+    // this.connectSocket('humedad',this.humSensor)
+    // this.connectSocket('pir',this.pirSensor)
+    // this.connectSocket('ultrasonico',this.ultraSensor)
   }
+
   connectSocket(topic:string, sensorValue) {
     this.channel = this.ws.subscribe(topic)
     
-    this.channel.on('dataSensor',(data:any) => {
+    this.channel.on('message',(data:any) => {
       sensorValue = data
     })
   }
   temp() {
-    this.channel.emit('dataSensor', this.value)
-    this.tempSensor = this.value
-    this.value = ""
+    this.channel = this.ws.subscribe('temperatura')
+    
+    this.channel.on('message',(data:any) => {
+      this.tempSensor = data
+    })
   }
   hum() {
-    this.channel.emit('dataSensor', this.value)
-    this.humSensor = this.value
-    this.value = ""
+    this.channel = this.ws.subscribe('humedad')
+    
+    this.channel.on('message',(data:any) => {
+      this.humSensor = data
+    })
   }
   pir() {
-    this.channel.emit('dataSensor', this.value)
-    if (this.value == true) { 
-      this.motionDetected = true
-      this.pirSensor = 'Hay Movimiento'}
-    if (this.value == false) { 
-      this.motionDetected = false
-      this.pirSensor = 'Área Segura'  }
-    this.value = ""
+    this.channel = this.ws.subscribe('pir')
+    
+    this.channel.on('message',(data:any) => {
+      this.value = data
+      if (this.value == true) { 
+        this.motionDetected = true
+        this.pirSensor = 'Hay Movimiento'}
+      if (this.value == false) { 
+        this.motionDetected = false
+        this.pirSensor = 'Área Segura'  }
+    })
   }
   ultra() {
-    this.channel.emit('dataSensor', this.value)
-    this.ultraSensor = this.value
-    this.value = ""
+    this.channel = this.ws.subscribe('ultrasonico')
+    
+    this.channel.on('message',(data:any) => {
+      this.ultraSensor = data
+    })
   }
+  // ultra() {
+  //   this.channel.emit('dataSensor', this.value)
+  //   this.ultraSensor = this.value
+  //   this.value = ""
+  // }
 
   showQuerys() {
     this.resultService.tempMax().subscribe((o:any) => {

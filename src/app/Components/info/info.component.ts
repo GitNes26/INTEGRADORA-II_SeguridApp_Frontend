@@ -4,7 +4,7 @@ import { Sensor } from '../../Models/sensor';
 import { AuthService } from '../../Services/auth.service';
 import { SensorService } from '../../Services/sensor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { timeMessage, successDialog } from '../../../../../VERSION OBSOLETA/INTEGRADORA-II_SeguridApp_Frontend/src/app/Functions/Alerts';
+import { timeMessage, successDialog } from '../../Functions/Alerts';
 import { Router } from '@angular/router';
 import { ResultService } from '../../Services/result.service';
 
