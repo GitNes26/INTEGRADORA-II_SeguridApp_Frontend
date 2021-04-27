@@ -67,7 +67,7 @@ export class MonitoringComponent implements OnInit {
           sensor : this.mySensor._id,
           data : this.tempSensor
         }
-        console.log(this.result);
+        // console.log(this.result);
         
         this.resultService.store(this.result).subscribe(() =>{
           console.log('dato temperatura guardado');
@@ -89,7 +89,7 @@ export class MonitoringComponent implements OnInit {
           sensor : this.mySensor._id,
           data : this.humSensor
         }
-        console.log(this.result);
+        // console.log(this.result);
         
         this.resultService.store(this.result).subscribe(() =>{
           console.log('dato humedad guardado');
@@ -118,7 +118,7 @@ export class MonitoringComponent implements OnInit {
           sensor : this.mySensor._id,
           data : this.motionDetected
         }
-        console.log(this.result);
+        // console.log(this.result);
         
         this.resultService.store(this.result).subscribe(() =>{
           console.log('dato pir guardado');
@@ -140,7 +140,7 @@ export class MonitoringComponent implements OnInit {
           sensor : this.mySensor._id,
           data : this.ultraSensor
         }
-        console.log(this.result);
+        // console.log(this.result);
         
         this.resultService.store(this.result).subscribe(() =>{
           console.log('dato ultrasonico guardado');
