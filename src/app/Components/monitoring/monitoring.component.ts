@@ -40,6 +40,7 @@ export class MonitoringComponent implements OnInit {
   now: string;
 
   constructor( private resultService:ResultService, private sensorService:SensorService) {
+    this.showQuerys()
   }
 
   ngOnInit(): void {
