@@ -158,27 +158,27 @@ export class MonitoringComponent implements OnInit {
 
   showQuerys() {
     this.resultService.tempMax().subscribe((o:any) => {
-      this.result = o[0]
+      this.result = o
       this.tempMax = this.result.data
       toastN()
     })
     this.resultService.tempMin().subscribe((o:any) => {
-      this.result = o[0]
+      this.result = o
       this.tempMin = this.result.data
       toastN()
     })
     this.resultService.humMax().subscribe((o:any) => {
-      this.result = o[0]
+      this.result = o
       this.humMax = this.result.data
       toastN()
     })
     this.resultService.humMin().subscribe((o:any) => {
-      this.result = o[0]
+      this.result = o
       this.humMin = this.result.data
       toastN()
     })
     this.resultService.presenceCounter().subscribe((o:any) => {
-      this.presenceCounter = o[0].presencias
+      this.presenceCounter = o.presencias
       toastN()
     })
   }
