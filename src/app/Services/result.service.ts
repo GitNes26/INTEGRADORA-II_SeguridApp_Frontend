@@ -27,6 +27,14 @@ export class ResultService {
     return this.http.get(`${this.apiURL}api/result/tempMin`, {headers:this.header})
   }
 
+  humMax() {
+    return this.http.get(`${this.apiURL}api/result/humMax`, {headers:this.header})
+  }
+
+  humMin() {
+    return this.http.get(`${this.apiURL}api/result/humMin`, {headers:this.header})
+  }
+
   presenceCounter() {
     return this.http.get(`${this.apiURL}api/result/presenceCounter`, {headers:this.header})
   }

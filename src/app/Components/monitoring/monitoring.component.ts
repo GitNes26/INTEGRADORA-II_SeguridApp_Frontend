@@ -82,7 +82,7 @@ export class MonitoringComponent implements OnInit {
     
     this.channel.on('message',(d:any) => {
       this.humSensor = d
-      
+
       this.sensorService.showSensor('Humedad').subscribe((dataSensor:any) =>{
         this.mySensor = dataSensor
         this.result = {
@@ -158,28 +158,28 @@ export class MonitoringComponent implements OnInit {
 
   showQuerys() {
     this.resultService.tempMax().subscribe((o:any) => {
-      if (o != null) {
-        this.result = o[0]
-        toastN()
-      } else {this.result.data = 0}
+      this.result = o[0]
       this.tempMax = this.result.data
-
+      toastN()
     })
     this.resultService.tempMin().subscribe((o:any) => {
-      if (o != " ") {
-        console.log('hola');
-        
-        this.result = o[0]
-        toastN()
-      } else { console.log('adios');
-       this.result.data = 0}
+      this.result = o[0]
       this.tempMin = this.result.data
+      toastN()
+    })
+    this.resultService.humMax().subscribe((o:any) => {
+      this.result = o[0]
+      this.humMax = this.result.data
+      toastN()
+    })
+    this.resultService.humMin().subscribe((o:any) => {
+      this.result = o[0]
+      this.humMin = this.result.data
+      toastN()
     })
     this.resultService.presenceCounter().subscribe((o:any) => {
-      if (o != null) {
-        this.presenceCounter = o[0].presencias
-        toastN()
-      }
+      this.presenceCounter = o[0].presencias
+      toastN()
     })
   }
 
