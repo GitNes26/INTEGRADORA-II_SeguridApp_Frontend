@@ -57,12 +57,12 @@ export class MonitoringComponent implements OnInit {
 
   temp() {
     this.channel = this.ws.subscribe('temperatura')
-    
-    this.sensorService.showSensor('Temperatura').subscribe((dataSensor:any) =>{
-      this.mySensor = dataSensor
           
-      this.channel.on('message',(d:any) => {
-        this.tempSensor = d
+    this.channel.on('message',(d:any) => {
+      this.tempSensor = d
+
+      this.sensorService.showSensor('Temperatura').subscribe((dataSensor:any) =>{
+        this.mySensor = dataSensor
         this.result = {
           sensor : this.mySensor._id,
           data : this.tempSensor
@@ -78,13 +78,13 @@ export class MonitoringComponent implements OnInit {
     })
   }
   hum() {
-    this.channel = this.ws.subscribe('humedad')
-
-    this.sensorService.showSensor('Humedad').subscribe((dataSensor:any) =>{
-      this.mySensor = dataSensor
+    this.channel = this.ws.subscribe('humedad') 
     
-      this.channel.on('message',(d:any) => {
-        this.humSensor = d
+    this.channel.on('message',(d:any) => {
+      this.humSensor = d
+      
+      this.sensorService.showSensor('Humedad').subscribe((dataSensor:any) =>{
+        this.mySensor = dataSensor
         this.result = {
           sensor : this.mySensor._id,
           data : this.humSensor
@@ -101,18 +101,18 @@ export class MonitoringComponent implements OnInit {
   }
   pir() {
     this.channel = this.ws.subscribe('pir')
-
-    this.sensorService.showSensor('Movimiento').subscribe((dataSensor:any) =>{
-      this.mySensor = dataSensor
     
-      this.channel.on('message',(data:any) => {
-        this.value = data
-        if (this.value == 1) { 
-          this.motionDetected = true
-          this.pirSensor = 'Hay Movimiento'}
-        if (this.value == 0) { 
-          this.motionDetected = false
-          this.pirSensor = 'Área Segura'  }
+    this.channel.on('message',(data:any) => {
+      this.value = data
+      if (this.value == 1) { 
+        this.motionDetected = true
+        this.pirSensor = 'Hay Movimiento'}
+      if (this.value == 0) { 
+        this.motionDetected = false
+        this.pirSensor = 'Área Segura'  }
+
+      this.sensorService.showSensor('Movimiento').subscribe((dataSensor:any) =>{
+        this.mySensor = dataSensor
 
         this.result = {
           sensor : this.mySensor._id,
@@ -125,17 +125,16 @@ export class MonitoringComponent implements OnInit {
         })
 
       })
-
     })
   }
   ultra() {
     this.channel = this.ws.subscribe('ultrasonico')
-
-    this.sensorService.showSensor('Distancia').subscribe((dataSensor:any) =>{
-      this.mySensor = dataSensor
     
-      this.channel.on('message',(d:any) => {
-        this.ultraSensor = d
+    this.channel.on('message',(d:any) => {
+      this.ultraSensor = d
+
+      this.sensorService.showSensor('Distancia').subscribe((dataSensor:any) =>{
+        this.mySensor = dataSensor
 
         this.result = {
           sensor : this.mySensor._id,
