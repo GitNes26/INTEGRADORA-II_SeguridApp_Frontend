@@ -19,7 +19,7 @@ import Ws from '@adonisjs/websocket-client'
 export class MonitoringComponent implements OnInit {
 
   rute:String
-  sensorArray:Sensor[] = []
+  mySensor:Sensor
   ws:any
   channel:any
   value:any
@@ -39,69 +39,116 @@ export class MonitoringComponent implements OnInit {
   timeNow: number;
   now: string;
 
-  constructor( private resultService:ResultService) {
+  constructor( private resultService:ResultService, private sensorService:SensorService) {
   }
 
   ngOnInit(): void {
     // this.ws = Ws('ws://127.0.0.1:3333', {
+      // path: 'seguridapp' })
     this.ws = Ws('ws://cisco16.tk', {
       path:'seguridapp/?token='+localStorage.getItem('myToken')
     })
     this.ws.connect()
-    // this.connectSocket('tempData',this.tempSensor)
-    // this.connectSocket('humData',this.humSensor)
-    // this.connectSocket('pirData',this.pirSensor)
-    // this.connectSocket('ultraData',this.ultraSensor)
     this.temp()
     this.hum()
     this.pir()
     this.ultra()
-
-    // this.connectSocket('temperatura',this.tempSensor)
-    // this.connectSocket('humedad',this.humSensor)
-    // this.connectSocket('pir',this.pirSensor)
-    // this.connectSocket('ultrasonico',this.ultraSensor)
   }
 
-  connectSocket(topic:string, sensorValue) {
-    this.channel = this.ws.subscribe(topic)
-    
-    this.channel.on('message',(data:any) => {
-      sensorValue = data
-    })
-  }
   temp() {
     this.channel = this.ws.subscribe('temperatura')
     
-    this.channel.on('message',(data:any) => {
-      this.tempSensor = data
+    this.sensorService.showSensor('Temperatura').subscribe((dataSensor:any) =>{
+      this.mySensor = dataSensor
+          
+      this.channel.on('message',(d:any) => {
+        this.tempSensor = d
+        this.result = {
+          sensor : this.mySensor._id,
+          data : this.tempSensor
+        }
+        console.log(this.result);
+        
+        this.resultService.store(this.result).subscribe(() =>{
+          console.log('dato temperatura guardado');
+        })
+
+      })
+
     })
   }
   hum() {
     this.channel = this.ws.subscribe('humedad')
+
+    this.sensorService.showSensor('Humedad').subscribe((dataSensor:any) =>{
+      this.mySensor = dataSensor
     
-    this.channel.on('message',(data:any) => {
-      this.humSensor = data
+      this.channel.on('message',(d:any) => {
+        this.humSensor = d
+        this.result = {
+          sensor : this.mySensor._id,
+          data : this.humSensor
+        }
+        console.log(this.result);
+        
+        this.resultService.store(this.result).subscribe(() =>{
+          console.log('dato humedad guardado');
+        })
+
+      })
+
     })
   }
   pir() {
     this.channel = this.ws.subscribe('pir')
+
+    this.sensorService.showSensor('Movimiento').subscribe((dataSensor:any) =>{
+      this.mySensor = dataSensor
     
-    this.channel.on('message',(data:any) => {
-      this.value = data
-      if (this.value == true) { 
-        this.motionDetected = true
-        this.pirSensor = 'Hay Movimiento'}
-      if (this.value == false) { 
-        this.motionDetected = false
-        this.pirSensor = 'Área Segura'  }
+      this.channel.on('message',(data:any) => {
+        this.value = data
+        if (this.value == 1) { 
+          this.motionDetected = true
+          this.pirSensor = 'Hay Movimiento'}
+        if (this.value == 0) { 
+          this.motionDetected = false
+          this.pirSensor = 'Área Segura'  }
+
+        this.result = {
+          sensor : this.mySensor._id,
+          data : this.motionDetected
+        }
+        console.log(this.result);
+        
+        this.resultService.store(this.result).subscribe(() =>{
+          console.log('dato pir guardado');
+        })
+
+      })
+
     })
   }
   ultra() {
     this.channel = this.ws.subscribe('ultrasonico')
+
+    this.sensorService.showSensor('Distancia').subscribe((dataSensor:any) =>{
+      this.mySensor = dataSensor
     
-    this.channel.on('message',(data:any) => {
-      this.ultraSensor = data
+      this.channel.on('message',(d:any) => {
+        this.ultraSensor = d
+
+        this.result = {
+          sensor : this.mySensor._id,
+          data : this.ultraSensor
+        }
+        console.log(this.result);
+        
+        this.resultService.store(this.result).subscribe(() =>{
+          console.log('dato ultrasonico guardado');
+        })
+
+      })
+
     })
   }
   // ultra() {
@@ -112,18 +159,28 @@ export class MonitoringComponent implements OnInit {
 
   showQuerys() {
     this.resultService.tempMax().subscribe((o:any) => {
-      this.result = o[0]
+      if (o != null) {
+        this.result = o[0]
+        toastN()
+      } else {this.result.data = 0}
       this.tempMax = this.result.data
-      toastN()
+
     })
     this.resultService.tempMin().subscribe((o:any) => {
-      this.result = o[0]
+      if (o != " ") {
+        console.log('hola');
+        
+        this.result = o[0]
+        toastN()
+      } else { console.log('adios');
+       this.result.data = 0}
       this.tempMin = this.result.data
-      toastN()
     })
     this.resultService.presenceCounter().subscribe((o:any) => {
-      this.presenceCounter = o[0].presencias
-      toastN()
+      if (o != null) {
+        this.presenceCounter = o[0].presencias
+        toastN()
+      }
     })
   }
 

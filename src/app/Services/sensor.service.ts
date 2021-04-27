@@ -24,4 +24,8 @@ export class SensorService {
   showMySensors() {
     return this.http.get(`${this.apiURL}api/sensor`, {headers:this.header})
   }
+
+  showSensor(sensorName:string): Observable<any> {
+    return this.http.get(`${this.apiURL}api/sensor/`+sensorName, {headers:this.header})
+  }
 }

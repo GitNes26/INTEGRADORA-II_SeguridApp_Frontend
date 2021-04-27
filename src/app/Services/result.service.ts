@@ -1,6 +1,7 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
+import { Result } from '../Models/result';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class ResultService {
 
   constructor( private http:HttpClient) {
     this.header.append('Authorization', 'Bearer '+ localStorage.getItem('myToken'))
+  }
+
+  store(result:Result) {
+    return this.http.post(`${this.apiURL}api/result`, result, {headers:this.header})
   }
 
   tempMax() {
