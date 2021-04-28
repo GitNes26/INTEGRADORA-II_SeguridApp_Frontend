@@ -32,7 +32,7 @@ export class MonitoringComponent implements OnInit {
   tempMin:number = 0
   humMax:number = 0
   humMin:number = 0
-  presenceCounter:number = 0
+  presenceCounter:any = "0"
 
   clickRefresh = true
   motionDetected = false
@@ -179,7 +179,7 @@ export class MonitoringComponent implements OnInit {
       toastN()
     })
     this.resultService.presenceCounter().subscribe((o:any) => {
-      this.presenceCounter = o.presencias
+      this.presenceCounter = o.data
       toastN()
     })
   }
